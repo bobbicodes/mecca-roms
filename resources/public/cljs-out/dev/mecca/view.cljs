@@ -1,10 +1,9 @@
 (ns ^:figwheel-hooks mecca.view
-  (:require [mecca.subs :as subs]
-            [re-frame.core :as rf :refer [subscribe dispatch]]
-            [mecca.events :as events]
-            [goog.object :as o]
-            [goog.crypt :as crypt]
-            [mecca.asterix :refer [asterix-hex]]))
+  (:require
+   [re-frame.core :as rf :refer [subscribe dispatch]]
+   [goog.object :as o]
+   [goog.crypt :as crypt]
+   [mecca.mario :refer [mario-hex]]))
 
 (defn hex-bytes
   ([file n] (hex-bytes file n (inc n)))
@@ -52,7 +51,7 @@
                [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
                [:td.tg-hmp3 (hex->ascii (hex-bytes file from to))]]))]]])
 
-(defn song-info [file]
+(defn file-info [file]
        [:div
         [:p (str "Version number: " (first (hex-bytes file 0x05)))]
         [:p (str "Total songs: " (js/parseInt (str "0x" (first (hex-bytes file 0x06)))))]
@@ -95,11 +94,11 @@
   (let [offsets (get register-banks (dec n))]
     (hex-bytes file (first offsets) (last offsets))))
   
-(defn music-data [file]
+(defn rom-data [file]
   (let [bank (subscribe [:register-bank])]
     [:div
-     [:h2 "Music data"]
-     (if (= (bankswitch-vals file) ["00" "00" "00" "00" "00" "00" "00" "00"])
+     [:h2 "ROM data"]
+     (when (= (bankswitch-vals file) ["00" "00" "00" "00" "00" "00" "00" "00"])
        [:div
         [:p "This song does not use bankswitching."]
         [:p (str "Initializing from $080 at load address " (load-address file) ".")]])
@@ -113,8 +112,8 @@
 
 (defn file-import []
   [:div
-   [:h1 "Import NSF file"]
-   [:h4 "Web parser for NES Sound Format"]
+   [:h1 "Import .nes file"]
+   [:h4 "Web parser for iNES file format"]
    [:p]
    [:div
     [:input#input
@@ -131,18 +130,22 @@
                                             crypt/byteArrayToHex
                                             .toUpperCase)]))))}]]])
 
-(defn nsf? [file]
-  (= (apply str (take 10 file)) "4E45534D1A"))
+(comment
+  (str @(subscribe [:file-upload]))
+  )
+
+(defn nes-file? [file]
+  (= (apply str (take 8 file)) "4E45531A"))
 
 (defn mecca []
   (let [file @(subscribe [:file-upload])]
     [:div
      [file-import]
-     [button "Load example file" #(dispatch [:file-upload asterix-hex])]
-     (if (nsf? file)
+     [button "Load example file" #(dispatch [:file-upload mario-hex])]
+     (when (nes-file? file)
        [:div
-        [:h2.green "This is an NSF song :)"]
+        [:h2.green "This is an NES file :)"]
         [header-table file]
-        [:h3 "Song info:"]
-        [song-info file]
-        [music-data file]])]))
+        [:h3 "File info:"]
+        [file-info file]
+        [rom-data file]])]))
