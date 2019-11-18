@@ -3,7 +3,8 @@
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
    [goog.crypt :as crypt]
-   [mecca.mario :refer [mario-hex]]))
+   [mecca.mario :refer [mario-hex]]
+   [mecca.smw :refer [smw-hex]]))
 
 (defn hex-bytes
   ([file n] (hex-bytes file n (inc n)))
@@ -20,18 +21,18 @@
   (crypt/byteArrayToString
    (crypt/hexToByteArray (apply str s))))
   
-(def header 
+(def nes-offsets
   [[0x00 0x03] [0x04 0x05] [0x05 0x06] [0x06 0x07]
    [0x07 0x08] [0x08 0x09] [0x09 0x0a] [0x0a 0x0b]
    [0x0b 0x0f]])
 
-(defn header-table [file]
+(defn header-table [file offsets]
   [:div
    [:h3 "Header:"]
    [:table.tg
     [:tbody
      [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
-     (doall (for [[from to] header]
+     (doall (for [[from to] offsets]
               ^{:key [from to]}
               [:tr
                [:td.tg-hmp3 (str "0x" (.toString from 16))]
@@ -118,8 +119,8 @@
 
 (defn file-import []
   [:div
-   [:h1 "Import .nes file"]
-   [:h4 "Web parser for iNES file format"]
+   [:h1 "MECCA ROM Reader"]
+   [:h4 "Web parser for NES and SNES file formats"]
    [:p]
    [:div
     [:input#input
@@ -140,10 +141,8 @@
 (defn smc-title [file]
   (hex->ascii (apply str (hex-bytes file 0x81c0 0x81d5))))
 
-
-
 (comment
-(smc-title @(subscribe [:file-upload])) 
+(hex-bytes @(subscribe [:file-upload]) 0x81d6)
  (.toString (+ 0x81c0 21) 16)
  )
 
@@ -154,15 +153,20 @@
   (let [file @(subscribe [:file-upload])]
     [:div
      [file-import]
-     [button "Load example file" #(dispatch [:file-upload mario-hex])]
+     [button "Load NES file" #(dispatch [:file-upload mario-hex])]
+     [button "Load SNES file" #(dispatch [:file-upload smw-hex])]
      (when (nes-file? file)
        [:div
         [:h2.green "This is an NES file :)"]
-        [header-table file]
+        [header-table file nes-offsets]
         [:h3 "File info:"]
         [file-info file]])
      (when (= " " (last (smc-title file)))
        [:div
-        [:h3.green "Super Magi-Com file (.smc) detected :)"]
-        [:p (str "Title: " (smc-title file))]])
+        [:h4.green "Super Magi-Com file (.smc) detected :)"]
+        [:p (str "Title: " (smc-title file))]
+        [:p (str "ROM layout (LoROM / HiROM / FastROM): " (first (hex-bytes file 0x81d6)))]
+        [:p (str "Cartridge type (ROM-only / with save-RAM): " (first (hex-bytes file 0x81d7)))]
+        [:p (str "ROM byte size: " (first (hex-bytes file 0x81d8)))]
+        [:p (str "RAM byte size: " (first (hex-bytes file 0x81d9)))]])
      [rom-data file]]))

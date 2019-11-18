@@ -64,7 +64,8 @@ goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop'
 goog.addDependency("../mecca/events.js", ['mecca.events'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/subs.js", ['mecca.subs'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/mario.js", ['mecca.mario'], ['cljs.core']);
-goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'cljs.core', 'goog.object', 'mecca.mario', 're_frame.core']);
+goog.addDependency("../mecca/smw.js", ['mecca.smw'], ['cljs.core']);
+goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'cljs.core', 'goog.object', 'mecca.mario', 'mecca.smw', 're_frame.core']);
 goog.addDependency("../mecca/core.js", ['mecca.core'], ['goog.dom', 'mecca.events', 'mecca.subs', 'reagent.core', 'cljs.core', 'mecca.view', 're_frame.core']);
 goog.addDependency("../cljs/test.js", ['cljs.test'], ['cljs.core', 'cljs.pprint', 'clojure.string']);
 goog.addDependency("../figwheel/main/async_result.js", ['figwheel.main.async_result'], ['cljs.core', 'figwheel.repl']);
