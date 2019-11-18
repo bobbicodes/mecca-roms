@@ -1,4 +1,4 @@
-# mecca-nsf
+# mecca-nes
 Tool for reading [iNES files](https://wiki.nesdev.com/w/index.php/INES)
 
 ![Screenshot](/resources/public/images/screenshot.png)
