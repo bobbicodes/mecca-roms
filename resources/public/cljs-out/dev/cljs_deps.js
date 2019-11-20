@@ -60,6 +60,7 @@ goog.addDependency("../re_frame/utils.js", ['re_frame.utils'], ['cljs.core', 're
 goog.addDependency("../re_frame/db.js", ['re_frame.db'], ['re_frame.interop', 'cljs.core']);
 goog.addDependency("../re_frame/events.js", ['re_frame.events'], ['re_frame.interop', 're_frame.interceptor', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.utils', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/router.js", ['re_frame.router'], ['re_frame.interop', 're_frame.events', 're_frame.trace', 'cljs.core', 're_frame.loggers']);
+goog.addDependency("../mecca/roms.js", ['mecca.roms'], ['goog.crypt', 'cljs.core']);
 goog.addDependency("../mecca/examples/smw.js", ['mecca.examples.smw'], ['cljs.core']);
 goog.addDependency("../re_frame/fx.js", ['re_frame.fx'], ['re_frame.interop', 're_frame.interceptor', 're_frame.events', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.router', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/cofx.js", ['re_frame.cofx'], ['re_frame.interceptor', 're_frame.registrar', 'cljs.core', 're_frame.loggers', 're_frame.db']);
@@ -69,6 +70,6 @@ goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop'
 goog.addDependency("../mecca/events.js", ['mecca.events'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/subs.js", ['mecca.subs'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/examples/mario.js", ['mecca.examples.mario'], ['cljs.core']);
-goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'mecca.examples.mario', 'reagent.core', 'cljs.core', 'goog.object', 'mecca.examples.smw', 're_frame.core']);
+goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'mecca.examples.mario', 'reagent.core', 'cljs.core', 'goog.object', 'mecca.examples.smw', 'mecca.roms', 're_frame.core']);
 goog.addDependency("../mecca/core.js", ['mecca.core'], ['goog.dom', 'mecca.events', 'mecca.subs', 'reagent.core', 'cljs.core', 'mecca.view', 're_frame.core']);
 goog.addDependency("../figwheel/main/generated/dev_auto_test_runner.js", ['figwheel.main.generated.dev_auto_test_runner'], ['cljs.core', 'figwheel.main.testing']);

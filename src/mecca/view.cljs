@@ -1,33 +1,12 @@
 (ns ^:figwheel-hooks mecca.view
   (:require
+   [mecca.roms :as roms :refer [hex->ascii hex-bytes]]
    [reagent.core :as r]
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
    [goog.crypt :as crypt]
    [mecca.examples.mario :refer [mario-hex]]
    [mecca.examples.smw :refer [smw-hex]]))
-
-(defn hex-bytes
-  ([file n] (hex-bytes file n (inc n)))
-  ([file from to]
-   (map #(apply str %)
-        (partition 2 (take (- (* 2 to) (* 2 from))
-                           (drop (* 2 from) file))))))
-
-(defn word [file offset]
-  (str "0x" (first (hex-bytes file (inc offset)))
-       (first (hex-bytes file offset))))
-
-(defn hex->ascii [s]
-  (->> s 
-       (apply str) 
-       crypt/hexToByteArray
-       crypt/byteArrayToString))
-  
-(def nes-offsets
-  [[0x00 0x03] [0x04 0x05] [0x05 0x06] [0x06 0x07]
-   [0x07 0x08] [0x08 0x09] [0x09 0x0a] [0x0a 0x0b]
-   [0x0b 0x0f]])
 
 (defn header-table [file offsets]
   [:div
@@ -44,22 +23,29 @@
 
 (defn file-info [file]
   [:div
-   [:p (str "Size of PRG ROM (in 16 KB units): " (first (hex-bytes file 0x04)))]
-   [:p (str "Size of CHR ROM in 8 KB units (Value 0 means the board uses CHR RAM): " (first (hex-bytes file 0x05)))]
-   [:p (str "Flags 6 - Mapper, mirroring, battery, trainer: " (first (hex-bytes file 0x06)))]
-   [:p (str "Flags 7 - Mapper, VS/Playchoice, NES 2.0: " (first (hex-bytes file 0x07)))]
-   [:p (str "Flags 8 - PRG-RAM size (rarely used extension): " (first (hex-bytes file 0x08)))]
-   [:p (str "Flags 9 - TV system (rarely used extension): " (first (hex-bytes file 0x09)))]
-   [:p (str "Flags 10 - TV system, PRG-RAM presence (unofficial, rarely used extension): " (first (hex-bytes file 0x0a)))]
-   [:p (str "Unused padding (should be filled with zero, but some rippers put their name across bytes 7-15): " (first (hex-bytes file 0x0b 0x0f)))]])
+   [:p (str "Size of PRG ROM (in 16 KB units): " 
+            (first (hex-bytes file 0x04)))]
+   [:p (str "Size of CHR ROM in 8 KB units (Value 0 means the board uses CHR RAM): " 
+            (first (hex-bytes file 0x05)))]
+   [:p (str "Flags 6 - Mapper, mirroring, battery, trainer: " 
+            (first (hex-bytes file 0x06)))]
+   [:p (str "Flags 7 - Mapper, VS/Playchoice, NES 2.0: " 
+            (first (hex-bytes file 0x07)))]
+   [:p (str "Flags 8 - PRG-RAM size (rarely used extension): " 
+            (first (hex-bytes file 0x08)))]
+   [:p (str "Flags 9 - TV system (rarely used extension): " 
+            (first (hex-bytes file 0x09)))]
+   [:p (str "Flags 10 - TV system, PRG-RAM presence (unofficial, rarely used extension): " 
+            (first (hex-bytes file 0x0a)))]
+   [:p (str "Unused padding (should be filled with zero, but some rippers put their name across bytes 7-15): " 
+            (first (hex-bytes file 0x0b 0x0f)))]])
 
 (defn number-input [label value on-change]
   [:label label
    [:input
-    {:style     
-     {:width            "6%"
-      :height "4%"
-      :background-color "lightgray"}
+    {:style     {:width            "6%"
+                 :height           "4%"
+                 :background-color "lightgray"}
      :type      "number"
      :value     value
      :on-change on-change}]])
@@ -69,11 +55,7 @@
    {:on-click onclick}
    label])
 
-(defn rom-bank [file n]
-  (let [offsets (take 2 (drop n (iterate #(+ 8192 %) 0)))]
-    (hex-bytes file (first offsets) (last offsets))))
-
-(defn rom-data [file]
+(defn rom-data []
   (let [bank (subscribe [:bank])]
     (fn [file]
       [:div
@@ -83,12 +65,8 @@
         [:textarea 
          {:rows      30
           :cols      80
-          :value     (apply str (interpose " " (rom-bank file (js/parseInt @bank))))
+          :value     (apply str (interpose " " (roms/rom-bank file (js/parseInt @bank))))
           :read-only true}]]])))
-
-(comment
-  (str @(subscribe [:file-upload]))
-  )
 
 (defn file-upload []
    [:div
@@ -106,12 +84,6 @@
                                 (js/Uint8Array.)
                                 crypt/byteArrayToHex
                                 .toUpperCase)]))))}]])
-
-(defn smc-title [file]
-  (hex->ascii (apply str (hex-bytes file 0x81c0 0x81d5))))
-
-(defn nes-file? [file]
-  (= (apply str (take 8 file)) "4E45531A"))
 
 (defn menu-items []
   (let [selected (r/atom nil)
@@ -176,7 +148,7 @@
   [:div.parent
    [:div.wide 
     [:h1 "MECCA ROM Reader"]
-    [:p "Inspect Nintendo binaries"]]
+    [:p "Inspect Nintendo binaries for image, sound and game data"]]
    [:div.narrow
     [burger-menu]]])
 
@@ -184,31 +156,32 @@
   (let [file (subscribe [:file-upload])
         selected-item (subscribe [:selected-item])]
     (fn []
-      [:div {:on-click (when @(subscribe [:burger-menu?]) #(dispatch [:hide-menu]))}
+      [:div {:on-click (when @(subscribe [:burger-menu?]) 
+                         #(dispatch [:hide-menu]))}
        [nav-bar]
        (when @selected-item 
-         [:p.green {:style {:text-align "right"}}(str "Choice " (inc @selected-item) " selected :)")])
+         [:p.green {:style {:text-align "right"}}
+          (str "Choice " (inc @selected-item) " selected :)")])
        [file-upload]
        [button "Load NES file" #(dispatch [:file-upload mario-hex])]
        [button "Load SNES file" #(dispatch [:file-upload smw-hex])]
-       (when (nes-file? @file)
+       (when (roms/nes-file? @file)
          [:div
-          [:h2.green "This is an NES file :)"]
-          [header-table @file nes-offsets]
+          [:h2.green "This is an NES ROM :)"]
+          [header-table @file roms/nes-offsets]
           [:h3 "File info:"]
           [file-info @file]])
-       (when (= " " (last (smc-title @file)))
+       (when (= " " (last (roms/smc-title @file)))
          [:div
-          [:h3.green "This is a Super Magicom file :)"]
-          [:div "Title: " [:span.green (str (smc-title @file))]]
-          [:div "ROM layout: " [:span.green (case (first (hex-bytes @file 0x81d5))
-                                              "20" "LoROM"
-                                              (first (hex-bytes @file 0x81d5)))]]
-          [:p (str "Cartridge type (ROM-only / with save-RAM): " (first (hex-bytes @file 0x81d6)))]
+          [:h3.green "This is a Super Magicom ROM :)"]
+          [:div "Title: " [:span.green (str (roms/smc-title @file))]]
+          [:div "ROM layout: " 
+           [:span.green (case (first (hex-bytes @file 0x81d5))
+                          "20" "LoROM"
+                          (first (hex-bytes @file 0x81d5)))]]
+          [:p (str "Cartridge type (ROM-only / with save-RAM): " 
+                   (first (hex-bytes @file 0x81d6)))]
           [:p (str "ROM byte size: " (first (hex-bytes @file 0x81d7)))]
           [:p (str "RAM byte size: " (first (hex-bytes @file 0x81d8)))]])
        [rom-data @file]])))
 
-(comment
-  (str @(subscribe [:file-upload]))
-  )
