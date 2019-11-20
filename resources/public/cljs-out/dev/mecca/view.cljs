@@ -61,6 +61,7 @@
       [:div
        [:h2 "ROM data:"]
        [number-input "Select 8K bank: " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
+       [:p (str "$" (apply str (interpose " - $" (map #(.toString % 16) (take 2 (drop (js/parseInt @bank) (iterate #(+ 8192 %) 0)))))))]
        [:div
         [:textarea 
          {:rows      30
@@ -118,7 +119,7 @@
   (let [hover? (r/atom false)
         menu? (subscribe [:burger-menu?])]
     (fn []
-      [:svg {:width 128 :height 128}
+      [:svg {:width 128 :height 96}
        [:g {:on-mouse-over #(reset! hover? true)
             :on-mouse-out  #(reset! hover? false)
             :on-click      #(dispatch [:toggle-menu])
