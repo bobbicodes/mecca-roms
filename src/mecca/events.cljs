@@ -1,12 +1,12 @@
 (ns ^:figwheel-hooks mecca.events
   (:require
-   [re-frame.core :refer [reg-event-db reg-event-fx dispatch subscribe]]))
+   [re-frame.core :refer [reg-event-db]]))
 
 (reg-event-db
  :initialize-db
  (fn [_ _]
    {:file-upload nil
-    :register-bank 1}))
+    :register-bank 0}))
 
 (reg-event-db
  :select-bank

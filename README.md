@@ -1,4 +1,4 @@
-# mecca-nes
+# mecca-roms
 Tool for reading [iNES](https://wiki.nesdev.com/w/index.php/INES) and SNES ROM files
 
 ![Screenshot](/resources/public/images/screenshot.png)
