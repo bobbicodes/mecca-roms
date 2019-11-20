@@ -64,26 +64,31 @@
      :value     value
      :on-change on-change}]])
 
+(defn button [label onclick]
+  [:button
+   {:on-click onclick}
+   label])
+
 (defn rom-bank [file n]
   (let [offsets (take 2 (drop n (iterate #(+ 8192 %) 0)))]
     (hex-bytes file (first offsets) (last offsets))))
 
 (defn rom-data [file]
   (let [bank (subscribe [:bank])]
-    [:div
-     [:h2 "ROM data:"]
-     [number-input "Select 8K bank: " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
-     [:div
-      [:textarea 
-       {:rows      30
-        :cols      80
-        :value     (apply str (interpose " " (rom-bank file (js/parseInt @bank))))
-        :read-only true}]]]))
+    (fn [file]
+      [:div
+       [:h2 "ROM data:"]
+       [number-input "Select 8K bank: " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
+       [:div
+        [:textarea 
+         {:rows      30
+          :cols      80
+          :value     (apply str (interpose " " (rom-bank file (js/parseInt @bank))))
+          :read-only true}]]])))
 
-(defn button [label onclick]
-  [:button
-   {:on-click onclick}
-   label])
+(comment
+  (str @(subscribe [:file-upload]))
+  )
 
 (defn file-upload []
    [:div
@@ -146,46 +151,37 @@
             :on-mouse-out  #(reset! hover? false)
             :on-click      #(dispatch [:toggle-menu])
             :style {:cursor "pointer"}}
-        [:rect {:rx           10
-                :stroke       "gray"
-                :stroke-width 0.5
-                :x            64
-                :y            5
-                :width        64
-                :height       64
-                :fill         "#f7f6cf"
-                :visibility   (if @hover?
-                                "visible"
-                                "hidden")}]
-        [:text
-         {:x           96
-          :y           54
-          :text-anchor "middle"
-          :font-size   54}
+        [:rect {:rx           10 :fill         "#f7f6cf"
+                :stroke       "gray" :stroke-width 0.5
+                :x            64 :y            5
+                :width        64 :height       64
+                :visibility   (if @hover? "visible"  "hidden")}]
+        [:text {:x           96 :y           54
+                :text-anchor "middle" :font-size   54}
          "🍔"]]
-       [:g ;{:on-mouse-out #(dispatch [:hide-menu])}
+       [:g
         [:rect.menu
         {:rx           5
+         :fill         "lightgray"
          :stroke       "gray"
-          :stroke-width 0.5
-          :x            0
-          :y            32
-          :width        96
-          :height       58
-          :fill         "lightgray"
-          :visibility   (if @menu? "visible" "hidden")}]
+         :stroke-width 0.5
+         :x            0
+         :y            32
+         :width        96
+         :height       58
+         :visibility   (if @menu? "visible" "hidden")}]
        [menu-items]]])))
 
 (defn nav-bar []
   [:div.parent
    [:div.wide 
     [:h1 "MECCA ROM Reader"]
-    [:p "Upload and inspect image sound and game data from Nintendo binaries"]]
+    [:p "Inspect Nintendo binaries"]]
    [:div.narrow
     [burger-menu]]])
 
 (defn mecca []
-  (let [file @(subscribe [:file-upload])
+  (let [file (subscribe [:file-upload])
         selected-item (subscribe [:selected-item])]
     (fn []
       [:div {:on-click (when @(subscribe [:burger-menu?]) #(dispatch [:hide-menu]))}
@@ -195,20 +191,24 @@
        [file-upload]
        [button "Load NES file" #(dispatch [:file-upload mario-hex])]
        [button "Load SNES file" #(dispatch [:file-upload smw-hex])]
-       (when (nes-file? file)
+       (when (nes-file? @file)
          [:div
           [:h2.green "This is an NES file :)"]
-          [header-table file nes-offsets]
+          [header-table @file nes-offsets]
           [:h3 "File info:"]
-          [file-info file]])
-       (when (= " " (last (smc-title file)))
+          [file-info @file]])
+       (when (= " " (last (smc-title @file)))
          [:div
           [:h3.green "This is a Super Magicom file :)"]
-          [:div "Title: " [:span.green (str (smc-title file))]]
-          [:div "ROM layout: " [:span.green (case (first (hex-bytes file 0x81d5))
+          [:div "Title: " [:span.green (str (smc-title @file))]]
+          [:div "ROM layout: " [:span.green (case (first (hex-bytes @file 0x81d5))
                                               "20" "LoROM"
-                                              (first (hex-bytes file 0x81d5)))]]
-          [:p (str "Cartridge type (ROM-only / with save-RAM): " (first (hex-bytes file 0x81d6)))]
-          [:p (str "ROM byte size: " (first (hex-bytes file 0x81d7)))]
-          [:p (str "RAM byte size: " (first (hex-bytes file 0x81d8)))]])
-       [rom-data file]])))
+                                              (first (hex-bytes @file 0x81d5)))]]
+          [:p (str "Cartridge type (ROM-only / with save-RAM): " (first (hex-bytes @file 0x81d6)))]
+          [:p (str "ROM byte size: " (first (hex-bytes @file 0x81d7)))]
+          [:p (str "RAM byte size: " (first (hex-bytes @file 0x81d8)))]])
+       [rom-data @file]])))
+
+(comment
+  (str @(subscribe [:file-upload]))
+  )
