@@ -25,16 +25,24 @@
 (defn nes-file? [file]
   (= (apply str (take 8 file)) "4E45531A"))
 
-(def nes-offsets
-  [[[0x00 0x03] "NES"]
-   [[0x04 0x05] "Size of PRG ROM (in 16 KB units)"]
-   [[0x05 0x06] "Size of CHR ROM in 8 KB units (Value 0 means the board uses CHR RAM)"]
-   [[0x06 0x07] "Flags 6 - Mapper, mirroring, battery, trainer"]
-   [[0x07 0x08] "Flags 7 - Mapper, VS/Playchoice, NES 2.0"]
-   [[0x08 0x09] "Flags 8 - PRG-RAM size (rarely used extension)"]
-   [[0x09 0x0a] "Flags 9 - TV system (rarely used extension)"]
-   [[0x0a 0x0b] "Flags 10 - TV system, PRG-RAM presence (unofficial, rarely used extension)"]
-   [[0x0b 0x0f] "Unused padding (should be filled with zero, but some rippers put their name across bytes 7-15)"]])
+(defn prg-rom-size
+  "Size of PRG ROM (in 16 KB units)"
+  [file]
+  (str (* 16 (hex-bytes file 0x04)) "KB"))
+
+(def nes-offsets     ;    each vector contains
+  [[[0x00 0x03]      ; <- the vector of offsets, followed by
+    "Hex to ASCII: " ; <- the NESplanation string, followed by 
+    hex->ascii]      ; <- a function that will compute the result
+                     ;    to display given the sequence of bytes.
+   [[0x04 0x05] "PRG ROM size in KB: " #(* 16 (js/parseInt (first %)))]
+   [[0x05 0x06] "CHR ROM size in KB: " #(* 8 (js/parseInt (first %)))]
+   [[0x06 0x07] "Flags 6 - Mapper, mirroring, battery, trainer: " first]
+   [[0x07 0x08] "Flags 7 - Mapper, VS/Playchoice, NES 2.0: " first]
+   [[0x08 0x09] "Flags 8 - PRG-RAM size (rarely used extension): " first]
+   [[0x09 0x0a] "Flags 9 - TV system (rarely used extension): " first]
+   [[0x0a 0x0b] "Flags 10 - TV system, PRG-RAM presence (unofficial, rarely used extension): " first]
+   [[0x0b 0x0f] "Unused padding (should be filled with zero, but some rippers put their name across bytes 7-15): " #(apply str %)]])
 
 (defn rom-bank [file n]
   (let [offsets (take 2 (drop n (iterate #(+ 8192 %) 0)))]

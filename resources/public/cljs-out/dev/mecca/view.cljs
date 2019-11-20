@@ -13,13 +13,15 @@
    [:h3 "Header:"]
    [:table.tg
     [:tbody
-     [:tr [:th.tg-0pky "Offsets"] [:th.tg-0lax "Hex"] [:th.tg-0lax "Meaning"]]
-     (doall (for [[[from to] note] offsets]
+     [:tr [:th.tg-0pky "Offsets"] [:th.tg-0lax "Hex"] [:th.tg-0lax "NESplanation"]]
+     (doall (for [[[from to] string value] offsets]
               ^{:key from}
               [:tr
                [:td.tg-hmp3 (str "$" (.toString from 16) " - $" (.toString to 16))]
                [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
-               [:td.tg-hmp3 (str note)]]))]]])
+               [:td.tg-hmp3 (str string (->>
+                                         (hex-bytes file from to)
+                                         value)) ]]))]]])
 
 (defn number-input [label value on-change]
   [:label label
