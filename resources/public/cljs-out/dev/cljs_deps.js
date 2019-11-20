@@ -69,6 +69,6 @@ goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop'
 goog.addDependency("../mecca/events.js", ['mecca.events'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/subs.js", ['mecca.subs'], ['cljs.core', 're_frame.core']);
 goog.addDependency("../mecca/examples/mario.js", ['mecca.examples.mario'], ['cljs.core']);
-goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'mecca.examples.mario', 'cljs.core', 'goog.object', 'mecca.examples.smw', 're_frame.core']);
+goog.addDependency("../mecca/view.js", ['mecca.view'], ['goog.crypt', 'mecca.examples.mario', 'reagent.core', 'cljs.core', 'goog.object', 'mecca.examples.smw', 're_frame.core']);
 goog.addDependency("../mecca/core.js", ['mecca.core'], ['goog.dom', 'mecca.events', 'mecca.subs', 'reagent.core', 'cljs.core', 'mecca.view', 're_frame.core']);
 goog.addDependency("../figwheel/main/generated/dev_auto_test_runner.js", ['figwheel.main.generated.dev_auto_test_runner'], ['cljs.core', 'figwheel.main.testing']);

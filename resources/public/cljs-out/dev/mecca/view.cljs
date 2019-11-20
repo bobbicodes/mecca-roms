@@ -1,5 +1,6 @@
 (ns ^:figwheel-hooks mecca.view
   (:require
+   [reagent.core :as r]
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
    [goog.crypt :as crypt]
@@ -107,30 +108,73 @@
 (defn nes-file? [file]
   (= (apply str (take 8 file)) "4E45531A"))
 
+(defn burger-menu []
+  (let [hover? (r/atom false)
+        menu? (subscribe [:burger-menu?])]
+    (fn []
+      [:svg {:width 128 :height 128}
+       [:g {:on-mouse-over #(reset! hover? true)
+            :on-mouse-out  #(reset! hover? false)
+            :on-click      #(dispatch [:show-menu])}
+        [:rect {:rx           10
+                :stroke       "gray"
+                :stroke-width 0.5
+                :x            64
+                :y            5
+                :width        64
+                :height       64
+                :fill         "#f7f6cf"
+                :visibility   (if @hover?
+                                "visible"
+                                "hidden")}]
+        [:text
+         {:x           96
+          :y           54
+          :text-anchor "middle"
+          :font-size   54}
+         "🍔"]]
+       [:rect {:rx 5
+               :stroke       "gray"
+               :stroke-width 0.5
+               :x            0
+               :y            32
+               :width        96
+               :height       96
+               :fill         "lightgray"
+               :visibility   (if @menu? "visible" "hidden")
+               :on-mouse-out #(dispatch [:hide-menu])}]])))
+
+(defn nav-bar []
+  [:div.parent
+   [:div.wide 
+    [:h1 "MECCA ROM Reader"]
+    [:p "Upload and inspect image sound and game data from Nintendo binaries"]]
+   [:div.narrow
+    [burger-menu]]])
+
 (defn mecca []
   (let [file @(subscribe [:file-upload])]
-    [:div
-     [:div.parent
-      [:h1.wide "MECCA ROM Reader"]
-      [:h1 {:on-click (fn [] (.log js/console "burger clicked"))} "🍔"]]
-     [:p "Upload and inspect image, sound and game data from Nintendo binaries"]
-     [file-upload]
-     [button "Load NES file" #(dispatch [:file-upload mario-hex])]
-     [button "Load SNES file" #(dispatch [:file-upload smw-hex])]
-     (when (nes-file? file)
-       [:div
-        [:h2.green "This is an NES file :)"]
-        [header-table file nes-offsets]
-        [:h3 "File info:"]
-        [file-info file]])
-     (when (= " " (last (smc-title file)))
-       [:div
-        [:h3.green "This is a Super Magicom file :)"]
-        [:div "Title: " [:span.green (str (smc-title file))]]
-        [:div "ROM layout: " [:span.green (case (first (hex-bytes file 0x81d5))
-                                            "20" "LoROM"
-                                            (first (hex-bytes file 0x81d5)))]]
-        [:p (str "Cartridge type (ROM-only / with save-RAM): " (first (hex-bytes file 0x81d6)))]
-        [:p (str "ROM byte size: " (first (hex-bytes file 0x81d7)))]
-        [:p (str "RAM byte size: " (first (hex-bytes file 0x81d8)))]])
-     [rom-data file]]))
+    (fn []
+      [:div
+       [nav-bar]
+       [:p (str @(subscribe [:burger-menu?]))]
+       [file-upload]
+       [button "Load NES file" #(dispatch [:file-upload mario-hex])]
+       [button "Load SNES file" #(dispatch [:file-upload smw-hex])]
+       (when (nes-file? file)
+         [:div
+          [:h2.green "This is an NES file :)"]
+          [header-table file nes-offsets]
+          [:h3 "File info:"]
+          [file-info file]])
+       (when (= " " (last (smc-title file)))
+         [:div
+          [:h3.green "This is a Super Magicom file :)"]
+          [:div "Title: " [:span.green (str (smc-title file))]]
+          [:div "ROM layout: " [:span.green (case (first (hex-bytes file 0x81d5))
+                                              "20" "LoROM"
+                                              (first (hex-bytes file 0x81d5)))]]
+          [:p (str "Cartridge type (ROM-only / with save-RAM): " (first (hex-bytes file 0x81d6)))]
+          [:p (str "ROM byte size: " (first (hex-bytes file 0x81d7)))]
+          [:p (str "RAM byte size: " (first (hex-bytes file 0x81d8)))]])
+       [rom-data file]])))
