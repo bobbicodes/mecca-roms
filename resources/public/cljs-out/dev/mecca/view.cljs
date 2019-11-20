@@ -64,20 +64,20 @@
      :value     value
      :on-change on-change}]])
 
-(defn register-bank [file n]
+(defn rom-bank [file n]
   (let [offsets (take 2 (drop n (iterate #(+ 8192 %) 0)))]
     (hex-bytes file (first offsets) (last offsets))))
 
 (defn rom-data [file]
-  (let [bank (subscribe [:register-bank])]
+  (let [bank (subscribe [:bank])]
     [:div
      [:h2 "ROM data:"]
-     [number-input "Select 8KB register bank: " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
+     [number-input "Select 8K bank: " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
      [:div
       [:textarea 
        {:rows      30
         :cols      80
-        :value     (apply str (interpose " " (register-bank file (js/parseInt @bank))))
+        :value     (apply str (interpose " " (rom-bank file (js/parseInt @bank))))
         :read-only true}]]]))
 
 (defn button [label onclick]
@@ -108,6 +108,35 @@
 (defn nes-file? [file]
   (= (apply str (take 8 file)) "4E45531A"))
 
+(defn menu-items []
+  (let [selected (r/atom nil)
+        menu? (subscribe [:burger-menu?])]
+    (fn []
+      (into [:g]
+            (for [choice (range 3)]
+              ^{:key choice}
+              [:g {:style {:cursor "pointer"}}
+               [:rect
+                {:rx           2
+                 :stroke       "black"
+                 :stroke-width 0.5
+                 :x            3
+                 :y            (+ 35 (* choice 18))
+                 :width        91
+                 :height       16
+                 :fill         (if (= choice @selected) "lightpink" "lightgray")
+                 :on-mouse-over #(reset! selected choice)
+                 :on-mouse-out #(reset! selected nil)
+                 :on-click #(dispatch [:select-item choice])
+                 :visibility   (if @menu? "visible" "hidden")}]
+               [:text {:x           18
+                       :y           (+ 48 (* choice 18))
+                       :text-anchor "left"
+                       :font-size   14
+                       :pointer-events "none"
+                       :visibility  (if @menu? "visible" "hidden")}
+                (str "Choice " (inc choice))]])))))
+
 (defn burger-menu []
   (let [hover? (r/atom false)
         menu? (subscribe [:burger-menu?])]
@@ -115,7 +144,8 @@
       [:svg {:width 128 :height 128}
        [:g {:on-mouse-over #(reset! hover? true)
             :on-mouse-out  #(reset! hover? false)
-            :on-click      #(dispatch [:show-menu])}
+            :on-click      #(dispatch [:toggle-menu])
+            :style {:cursor "pointer"}}
         [:rect {:rx           10
                 :stroke       "gray"
                 :stroke-width 0.5
@@ -133,16 +163,18 @@
           :text-anchor "middle"
           :font-size   54}
          "🍔"]]
-       [:rect {:rx 5
-               :stroke       "gray"
-               :stroke-width 0.5
-               :x            0
-               :y            32
-               :width        96
-               :height       96
-               :fill         "lightgray"
-               :visibility   (if @menu? "visible" "hidden")
-               :on-mouse-out #(dispatch [:hide-menu])}]])))
+       [:g ;{:on-mouse-out #(dispatch [:hide-menu])}
+        [:rect.menu
+        {:rx           5
+         :stroke       "gray"
+          :stroke-width 0.5
+          :x            0
+          :y            32
+          :width        96
+          :height       58
+          :fill         "lightgray"
+          :visibility   (if @menu? "visible" "hidden")}]
+       [menu-items]]])))
 
 (defn nav-bar []
   [:div.parent
@@ -153,11 +185,13 @@
     [burger-menu]]])
 
 (defn mecca []
-  (let [file @(subscribe [:file-upload])]
+  (let [file @(subscribe [:file-upload])
+        selected-item (subscribe [:selected-item])]
     (fn []
-      [:div
+      [:div {:on-click (when @(subscribe [:burger-menu?]) #(dispatch [:hide-menu]))}
        [nav-bar]
-       [:p (str @(subscribe [:burger-menu?]))]
+       (when @selected-item 
+         [:p.green {:style {:text-align "right"}}(str "Choice " (inc @selected-item) " selected :)")])
        [file-upload]
        [button "Load NES file" #(dispatch [:file-upload mario-hex])]
        [button "Load SNES file" #(dispatch [:file-upload smw-hex])]

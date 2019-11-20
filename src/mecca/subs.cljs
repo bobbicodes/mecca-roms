@@ -7,11 +7,16 @@
    (:file-upload db)))
 
 (reg-sub
- :register-bank
+ :bank
  (fn [db _]
-   (:register-bank db)))
+   (:bank db)))
 
 (reg-sub
  :burger-menu?
  (fn [db _]
    (:burger-menu? db)))
+
+(reg-sub
+ :selected-item
+ (fn [db _]
+   (:selected-item db)))

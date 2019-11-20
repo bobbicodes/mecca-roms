@@ -6,13 +6,19 @@
  :initialize-db
  (fn [_ _]
    {:burger-menu? false
+    :selected-item nil
     :file-upload nil
-    :register-bank 0}))
+    :bank 0}))
 
 (reg-event-db
  :select-bank
  (fn [db [_ bank]]
-   (assoc db :register-bank bank)))
+   (assoc db :bank bank)))
+
+(reg-event-db
+ :select-item
+ (fn [db [_ item]]
+   (assoc db :selected-item item)))
 
 (reg-event-db
  :show-menu
@@ -23,6 +29,11 @@
  :hide-menu
  (fn [db [_ _]]
    (assoc db :burger-menu? false)))
+
+(reg-event-db
+ :toggle-menu
+ (fn [db [_ _]]
+   (update db :burger-menu? not)))
 
 (reg-event-db
  :file-upload
