@@ -1,6 +1,6 @@
 (ns ^:figwheel-hooks mecca.view
   (:require
-   [mecca.roms :as roms :refer [hex->ascii hex-bytes]]
+   [mecca.roms :as roms :refer [hex-bytes]]
    [reagent.core :as r]
    [re-frame.core :as rf :refer [subscribe dispatch]]
    [goog.object :as o]
@@ -13,32 +13,13 @@
    [:h3 "Header:"]
    [:table.tg
     [:tbody
-     [:tr [:th.tg-0pky "Offset"] [:th.tg-0lax "Hex"] [:th.tg-0lax "ASCII"]]
-     (doall (for [[from to] offsets]
-              ^{:key [from to]}
+     [:tr [:th.tg-0pky "Offsets"] [:th.tg-0lax "Hex"] [:th.tg-0lax "Meaning"]]
+     (doall (for [[[from to] note] offsets]
+              ^{:key from}
               [:tr
-               [:td.tg-hmp3 (str "0x" (.toString from 16))]
+               [:td.tg-hmp3 (str "$" (.toString from 16) " - $" (.toString to 16))]
                [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
-               [:td.tg-hmp3 (hex->ascii (hex-bytes file from to))]]))]]])
-
-(defn file-info [file]
-  [:div
-   [:p (str "Size of PRG ROM (in 16 KB units): " 
-            (first (hex-bytes file 0x04)))]
-   [:p (str "Size of CHR ROM in 8 KB units (Value 0 means the board uses CHR RAM): " 
-            (first (hex-bytes file 0x05)))]
-   [:p (str "Flags 6 - Mapper, mirroring, battery, trainer: " 
-            (first (hex-bytes file 0x06)))]
-   [:p (str "Flags 7 - Mapper, VS/Playchoice, NES 2.0: " 
-            (first (hex-bytes file 0x07)))]
-   [:p (str "Flags 8 - PRG-RAM size (rarely used extension): " 
-            (first (hex-bytes file 0x08)))]
-   [:p (str "Flags 9 - TV system (rarely used extension): " 
-            (first (hex-bytes file 0x09)))]
-   [:p (str "Flags 10 - TV system, PRG-RAM presence (unofficial, rarely used extension): " 
-            (first (hex-bytes file 0x0a)))]
-   [:p (str "Unused padding (should be filled with zero, but some rippers put their name across bytes 7-15): " 
-            (first (hex-bytes file 0x0b 0x0f)))]])
+               [:td.tg-hmp3 (str note)]]))]]])
 
 (defn number-input [label value on-change]
   [:label label
@@ -149,7 +130,7 @@
   [:div.parent
    [:div.wide 
     [:h1 "MECCA ROM Reader"]
-    [:p "Inspect Nintendo binaries for image, sound and game data"]]
+    [:p "Inspect image, sound and game data from Nintendo binaries"]]
    [:div.narrow
     [burger-menu]]])
 
@@ -164,14 +145,12 @@
          [:p.green {:style {:text-align "right"}}
           (str "Choice " (inc @selected-item) " selected :)")])
        [file-upload]
-       [button "Load NES file" #(dispatch [:file-upload mario-hex])]
-       [button "Load SNES file" #(dispatch [:file-upload smw-hex])]
+       [button "Load NES ROM" #(dispatch [:file-upload mario-hex])]
+       [button "Load SNES ROM" #(dispatch [:file-upload smw-hex])]
        (when (roms/nes-file? @file)
          [:div
           [:h2.green "This is an NES ROM :)"]
-          [header-table @file roms/nes-offsets]
-          [:h3 "File info:"]
-          [file-info @file]])
+          [header-table @file roms/nes-offsets]])
        (when (= " " (last (roms/smc-title @file)))
          [:div
           [:h3.green "This is a Super Magicom ROM :)"]
