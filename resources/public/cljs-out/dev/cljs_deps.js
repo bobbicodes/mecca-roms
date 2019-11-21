@@ -71,13 +71,13 @@ goog.addDependency("../re_frame/utils.js", ['re_frame.utils'], ['cljs.core', 're
 goog.addDependency("../re_frame/db.js", ['re_frame.db'], ['re_frame.interop', 'cljs.core']);
 goog.addDependency("../re_frame/events.js", ['re_frame.events'], ['re_frame.interop', 're_frame.interceptor', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.utils', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/router.js", ['re_frame.router'], ['re_frame.interop', 're_frame.events', 're_frame.trace', 'cljs.core', 're_frame.loggers']);
+goog.addDependency("../mecca/roms.js", ['mecca.roms'], ['goog.crypt', 'cljs.core']);
+goog.addDependency("../mecca/examples/smw.js", ['mecca.examples.smw'], ['cljs.core']);
 goog.addDependency("../re_frame/fx.js", ['re_frame.fx'], ['re_frame.interop', 're_frame.interceptor', 're_frame.events', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.router', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/cofx.js", ['re_frame.cofx'], ['re_frame.interceptor', 're_frame.registrar', 'cljs.core', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/std_interceptors.js", ['re_frame.std_interceptors'], ['re_frame.interceptor', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.utils', 're_frame.loggers', 're_frame.cofx', 'clojure.data', 're_frame.db']);
 goog.addDependency("../re_frame/subs.js", ['re_frame.subs'], ['re_frame.interop', 're_frame.trace', 're_frame.registrar', 'cljs.core', 're_frame.utils', 're_frame.loggers', 're_frame.db']);
 goog.addDependency("../re_frame/core.js", ['re_frame.core'], ['re_frame.interop', 're_frame.interceptor', 're_frame.events', 're_frame.fx', 're_frame.registrar', 'cljs.core', 're_frame.router', 'clojure.set', 're_frame.std_interceptors', 're_frame.loggers', 're_frame.subs', 're_frame.cofx', 're_frame.db']);
-goog.addDependency("../mecca/roms.js", ['mecca.roms'], ['goog.crypt', 'cljs.core', 're_frame.core']);
-goog.addDependency("../mecca/examples/smw.js", ['mecca.examples.smw'], ['cljs.core']);
 goog.addDependency("../mecca/events.js", ['mecca.events'], ['cljs.core', 'mantra.core', 're_frame.core']);
 goog.addDependency("../mecca/subs.js", ['mecca.subs'], ['cljs.core', 'mantra.core', 're_frame.core']);
 goog.addDependency("../mecca/examples/mario.js", ['mecca.examples.mario'], ['cljs.core']);

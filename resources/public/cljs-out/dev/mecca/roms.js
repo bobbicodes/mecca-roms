@@ -3,7 +3,6 @@ goog.provide('mecca.roms');
 goog.require('cljs.core');
 goog.require('cljs.core.constants');
 goog.require('goog.crypt');
-goog.require('re_frame.core');
 mecca.roms.hex_bytes = (function mecca$roms$hex_bytes(var_args){
 var G__13229 = arguments.length;
 switch (G__13229) {
@@ -38,8 +37,12 @@ var length = cljs.core.count(s);
 return ["$",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(((4) - length),"0"))),cljs.core.str.cljs$core$IFn$_invoke$arity$1(s)].join('');
 });
 mecca.roms.format_bin = (function mecca$roms$format_bin(n){
-var length = cljs.core.count(n.toString((2)));
-return ["%",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(((8) - length),"0"))),cljs.core.str.cljs$core$IFn$_invoke$arity$1(n.toString((2)))].join('');
+var bin = parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(n)].join('')).toString((2));
+var length = cljs.core.count(bin);
+return ["%",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.repeat.cljs$core$IFn$_invoke$arity$2(((8) - length),"0"))),cljs.core.str.cljs$core$IFn$_invoke$arity$1(bin)].join('');
+});
+mecca.roms.nth_bit = (function mecca$roms$nth_bit(hex,n){
+return parseInt(cljs.core.nth.cljs$core$IFn$_invoke$arity$2(cljs.core.reverse(mecca.roms.format_bin(hex)),n));
 });
 mecca.roms.word = (function mecca$roms$word(file,offset){
 return ["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(mecca.roms.hex_bytes.cljs$core$IFn$_invoke$arity$2(file,(offset + (1))))),cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(mecca.roms.hex_bytes.cljs$core$IFn$_invoke$arity$2(file,offset)))].join('');
@@ -65,16 +68,11 @@ return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(((16) * mecca.roms.hex_bytes
 mecca.roms.nes_offsets = new cljs.core.PersistentVector(null, 9, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0),(3)], null),(function (p1__13233_SHARP_){
 return ["Hex to ASCII: ","\"",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mecca.roms.hex__GT_ascii(p1__13233_SHARP_)),"\""].join('');
 })], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(4),(5)], null),(function (p1__13234_SHARP_){
-return ["PRG ROM size: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((16) * parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13234_SHARP_))].join(''))))," KB (",cljs.core.str.cljs$core$IFn$_invoke$arity$1(parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13234_SHARP_))].join('')))," 16K blocks)"].join('');
+return ["PRG ROM size: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((16) * parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13234_SHARP_))].join(''))))," KB (",cljs.core.str.cljs$core$IFn$_invoke$arity$1(parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13234_SHARP_))].join('')))," 16K block",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13234_SHARP_))].join(''))))?null:"s")),")"].join('');
 })], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(5),(6)], null),(function (p1__13235_SHARP_){
 return ["CHR ROM size: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((8) * parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13235_SHARP_))].join(''))))," KB (",cljs.core.str.cljs$core$IFn$_invoke$arity$1(parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13235_SHARP_))].join('')))," 8K block",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),parseInt(["0x",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.first(p1__13235_SHARP_))].join(''))))?null:"s")),")"].join('');
 })], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(6),(7)], null),(function (p1__13236_SHARP_){
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.last(mecca.roms.format_bin(parseInt(cljs.core.first(p1__13236_SHARP_)))),"1")){
-return "This game uses vertical mirroring (horizontal arrangement)";
-} else {
-return cljs.core.first(p1__13236_SHARP_);
-
-}
+return ["Hex to binary: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mecca.roms.format_bin(parseInt(cljs.core.first(p1__13236_SHARP_))))," ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),mecca.roms.nth_bit(parseInt(cljs.core.first(p1__13236_SHARP_)),(0))))?"Bit 0 set - This game uses vertical mirroring (horizontal arrangement). ":null)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),mecca.roms.nth_bit(parseInt(cljs.core.first(p1__13236_SHARP_)),(1))))?"Bit 1 set - This cartridge contains battery-backed PRG RAM ($6000-7FFF) or other persistent memory. ":null)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),mecca.roms.nth_bit(parseInt(cljs.core.first(p1__13236_SHARP_)),(2))))?"Bit 2 set - This game contains a 512-byte trainer at $7000-$71FF (stored before PRG data). ":null)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),mecca.roms.nth_bit(parseInt(cljs.core.first(p1__13236_SHARP_)),(3))))?"Bit 3 set - Ignore mirroring control or above mirroring bit; instead provide four-screen VRAM. ":null))].join('');
 })], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(7),(8)], null),cljs.core.first], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(8),(9)], null),cljs.core.first], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(9),(10)], null),cljs.core.first], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(10),(11)], null),cljs.core.first], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(11),(15)], null),(function (p1__13237_SHARP_){
 return ["Ripped by (or zeros): ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,p1__13237_SHARP_))].join('');
 })], null)], null);
