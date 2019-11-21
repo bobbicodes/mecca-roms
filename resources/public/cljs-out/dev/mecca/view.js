@@ -165,7 +165,6 @@ break;
 return iter__4324__auto__(offsets);
 })())], null)], null)], null);
 });
-mecca.view.arrow_l = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["#000000","M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["#f8f800","M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"], null)], null);
 mecca.view.number_input = (function mecca$view$number_input(label,value,on_change){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$label,label,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$style,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$width,"6%",cljs.core.cst$kw$height,"4%",cljs.core.cst$kw$background_DASH_color,"lightgray"], null),cljs.core.cst$kw$type,"number",cljs.core.cst$kw$value,value,cljs.core.cst$kw$on_DASH_change,on_change], null)], null)], null);
 });
@@ -180,29 +179,46 @@ mecca.view.bank_selector = (function mecca$view$bank_selector(){
 var bank = (function (){var G__13274 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bank], null);
 return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1(G__13274) : re_frame.core.subscribe.call(null,G__13274));
 })();
-return ((function (bank){
+var hovered = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
+return ((function (bank,hovered){
 return (function (){
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,"translate(0,10)",cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_click,((function (bank){
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,["translate(0,10)",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(hovered),cljs.core.cst$kw$left))?"scale(1.2)":null))].join(''),cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_mouse_DASH_over,((function (bank,hovered){
+return (function (){
+return cljs.core.reset_BANG_(hovered,cljs.core.cst$kw$left);
+});})(bank,hovered))
+,cljs.core.cst$kw$on_DASH_mouse_DASH_out,((function (bank,hovered){
+return (function (){
+return cljs.core.reset_BANG_(hovered,null);
+});})(bank,hovered))
+,cljs.core.cst$kw$on_DASH_click,((function (bank,hovered){
 return (function (){
 var G__13275 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$dec_DASH_bank], null);
 return (re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1(G__13275) : re_frame.core.dispatch.call(null,G__13275));
-});})(bank))
-], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,"#000000",cljs.core.cst$kw$d,"M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,"#f8f800",cljs.core.cst$kw$d,"M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"], null)], null)], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.interpose.cljs$core$IFn$_invoke$arity$2(" - ",cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (bank){
+});})(bank,hovered))
+], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,"#000000",cljs.core.cst$kw$d,"M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,"#f8f800",cljs.core.cst$kw$d,"M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"], null)], null)], null),[cljs.core.str.cljs$core$IFn$_invoke$arity$1(cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.str,cljs.core.interpose.cljs$core$IFn$_invoke$arity$2(" - ",cljs.core.map.cljs$core$IFn$_invoke$arity$2(((function (bank,hovered){
 return (function (p1__13272_SHARP_){
 return mecca.view.format_hex(p1__13272_SHARP_.toString((16)));
-});})(bank))
-,cljs.core.take.cljs$core$IFn$_invoke$arity$2((2),cljs.core.drop.cljs$core$IFn$_invoke$arity$2(parseInt(cljs.core.deref(bank)),cljs.core.iterate(((function (bank){
+});})(bank,hovered))
+,cljs.core.take.cljs$core$IFn$_invoke$arity$2((2),cljs.core.drop.cljs$core$IFn$_invoke$arity$2(parseInt(cljs.core.deref(bank)),cljs.core.iterate(((function (bank,hovered){
 return (function (p1__13273_SHARP_){
 return ((8192) + p1__13273_SHARP_);
-});})(bank))
-,(0))))))))].join(''),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 5, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,"translate (0,5),rotate (180)",cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_click,((function (bank){
+});})(bank,hovered))
+,(0))))))))].join(''),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,["translate (0,5),rotate (180)",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(hovered),cljs.core.cst$kw$right))?"scale(1.2)":null))].join(''),cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_mouse_DASH_over,((function (bank,hovered){
+return (function (){
+return cljs.core.reset_BANG_(hovered,cljs.core.cst$kw$right);
+});})(bank,hovered))
+,cljs.core.cst$kw$on_DASH_mouse_DASH_out,((function (bank,hovered){
+return (function (){
+return cljs.core.reset_BANG_(hovered,null);
+});})(bank,hovered))
+,cljs.core.cst$kw$on_DASH_click,((function (bank,hovered){
 return (function (){
 var G__13276 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$inc_DASH_bank], null);
 return (re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.dispatch.cljs$core$IFn$_invoke$arity$1(G__13276) : re_frame.core.dispatch.call(null,G__13276));
-});})(bank))
+});})(bank,hovered))
 ], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,"#000000",cljs.core.cst$kw$d,"M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$path,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.cst$kw$stroke,"#f8f800",cljs.core.cst$kw$d,"M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"], null)], null)], null)], null);
 });
-;})(bank))
+;})(bank,hovered))
 });
 mecca.view.rom_data = (function mecca$view$rom_data(){
 var bank = (function (){var G__13277 = new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$bank], null);
