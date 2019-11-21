@@ -182,7 +182,7 @@ return (re_frame.core.subscribe.cljs$core$IFn$_invoke$arity$1 ? re_frame.core.su
 var hovered = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
 return ((function (bank,hovered){
 return (function (){
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,["translate(0,10)",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(hovered),cljs.core.cst$kw$left))?"scale(1.2)":null))].join(''),cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_mouse_DASH_over,((function (bank,hovered){
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$span,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,["translate(0,10)",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(hovered),cljs.core.cst$kw$left))?null:"scale(0.7)"))].join(''),cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_mouse_DASH_over,((function (bank,hovered){
 return (function (){
 return cljs.core.reset_BANG_(hovered,cljs.core.cst$kw$left);
 });})(bank,hovered))
@@ -203,7 +203,7 @@ return mecca.view.format_hex(p1__13272_SHARP_.toString((16)));
 return (function (p1__13273_SHARP_){
 return ((8192) + p1__13273_SHARP_);
 });})(bank,hovered))
-,(0))))))))].join(''),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,["translate (0,5),rotate (180)",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(hovered),cljs.core.cst$kw$right))?"scale(1.2)":null))].join(''),cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_mouse_DASH_over,((function (bank,hovered){
+,(0))))))))].join(''),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$svg,new cljs.core.PersistentArrayMap(null, 7, [cljs.core.cst$kw$width,(30),cljs.core.cst$kw$view_DASH_box,"0 -0.5 10 11",cljs.core.cst$kw$transform,["translate (0,5),rotate (180)",cljs.core.str.cljs$core$IFn$_invoke$arity$1(((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(hovered),cljs.core.cst$kw$right))?null:"scale(0.7)"))].join(''),cljs.core.cst$kw$cursor,"pointer",cljs.core.cst$kw$on_DASH_mouse_DASH_over,((function (bank,hovered){
 return (function (){
 return cljs.core.reset_BANG_(hovered,cljs.core.cst$kw$right);
 });})(bank,hovered))

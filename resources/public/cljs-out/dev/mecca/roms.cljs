@@ -35,8 +35,8 @@
     "Hex to ASCII: " ; <- the NESplanation string, followed by 
     hex->ascii]      ; <- a function that will compute the result
                      ;    to display given the sequence of bytes.
-   [[0x04 0x05] "PRG ROM size in KB: " #(* 16 (js/parseInt (first %)))]
-   [[0x05 0x06] "CHR ROM size in KB: " #(* 8 (js/parseInt (first %)))]
+   [[0x04 0x05] "PRG ROM size: " #(str (* 16 (js/parseInt (str "0x" (first %)))) " KB")]
+   [[0x05 0x06] "CHR ROM size: " #(str (* 8 (js/parseInt (str "0x" (first %)))) " KB")]
    [[0x06 0x07] "Flags 6 - Mapper, mirroring, battery, trainer: " first]
    [[0x07 0x08] "Flags 7 - Mapper, VS/Playchoice, NES 2.0: " first]
    [[0x08 0x09] "Flags 8 - PRG-RAM size (rarely used extension): " first]

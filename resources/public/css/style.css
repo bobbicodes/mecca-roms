@@ -70,7 +70,7 @@ body {
     color: purple;
     line-height: 1;
     padding: 8px;
-    margin: 4px;
+    margin: 2px;
   }
 
   h2 {
@@ -83,19 +83,18 @@ body {
   h4 {
     font-size: 1em;
     color: rgb(220, 20, 170);
-    line-height: 1.5;
-    padding : 16px;
-    margin : 0;
+    margin : 12px;
   }
 
   p {
     font-size : 16px;
-    padding: 16px;
+    padding: 12px;
     margin : 0;
 }
 
 input {
   padding: 4px;
+  margin: 8px;
 }
 
 textarea {
@@ -107,5 +106,5 @@ span {
 }
 
 button {
-  margin: 4px;
+  margin: 12px;
 }

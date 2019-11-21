@@ -67,7 +67,7 @@
   [:span
    [:svg {:width     30
           :view-box  "0 -0.5 10 11"
-          :transform (str "translate(0,10)" (when (= @hovered :left) "scale(1.2)"))
+          :transform (str "translate(0,10)" (when-not (= @hovered :left) "scale(0.7)"))
           :cursor    "pointer"
           :on-mouse-over #(reset! hovered :left)
           :on-mouse-out #(reset! hovered nil)
@@ -77,13 +77,13 @@
     [:path {:stroke "#f8f800"
             :d      "M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"}]]
    (str (apply str (interpose " - " (map #(-> % (.toString 16) format-hex) (take 2 (drop (js/parseInt @bank) (iterate #(+ 8192 %) 0)))))))
-   [:svg {:width     30
-          :view-box  "0 -0.5 10 11"
-          :transform (str "translate (0,5),rotate (180)" (when (= @hovered :right) "scale(1.2)"))
-          :cursor    "pointer"
+   [:svg {:width         30
+          :view-box      "0 -0.5 10 11"
+          :transform     (str "translate (0,5),rotate (180)" (when-not (= @hovered :right) "scale(0.7)"))
+          :cursor        "pointer"
           :on-mouse-over #(reset! hovered :right)
-:on-mouse-out #(reset! hovered nil)
-          :on-click  #(dispatch [:inc-bank])}
+          :on-mouse-out  #(reset! hovered nil)
+          :on-click      #(dispatch [:inc-bank])}
     [:path {:stroke "#000000"
             :d      "M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"}]
     [:path {:stroke "#f8f800"
@@ -166,8 +166,10 @@
                 :x            64 :y            5
                 :width        64 :height       64
                 :visibility   (if @hover? "visible"  "hidden")}]
-        [:text {:x           96 :y           54
-                :text-anchor "middle" :font-size   54}
+        [:text {:x           96
+                :y           54
+                :text-anchor "middle"
+                :font-size   54}
          "🍔"]]
        [:g
         [:rect.menu
