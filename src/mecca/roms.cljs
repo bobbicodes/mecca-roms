@@ -64,20 +64,51 @@
           (* 8 (js/parseInt (str "0x" (first %))))
           " KB (" (js/parseInt (str "0x" (first %)))
           " 8K block" (when-not (= 1 (js/parseInt (str "0x" (first %)))) "s") ")")]
-   [[0x06 0x07] #(str "Hex to binary: " (format-bin (js/parseInt (first %))) " "
-                      (when (= 1 (nth-bit (js/parseInt (first %)) 0))
-                        "Bit 0 set - This game uses vertical mirroring (horizontal arrangement). ")
-                      (when (= 1 (nth-bit (js/parseInt (first %)) 1))
-                        "Bit 1 set - This cartridge contains battery-backed PRG RAM ($6000-7FFF) or other persistent memory. ")
-                      (when (= 1 (nth-bit (js/parseInt (first %)) 2))
-                        "Bit 2 set - This game contains a 512-byte trainer at $7000-$71FF (stored before PRG data). ")
-                      (when (= 1 (nth-bit (js/parseInt (first %)) 3))
-                        "Bit 3 set - Ignore mirroring control or above mirroring bit; instead provide four-screen VRAM. "))]
-   [[0x07 0x08] first]
+   [[0x06 0x07] 
+    #(str "Hex to binary: " (format-bin (js/parseInt (first %))) " "
+          (when (= 1 (nth-bit (js/parseInt (first %)) 0))
+            "Bit 0 set - This game uses vertical mirroring (horizontal arrangement). ")
+          (when (= 1 (nth-bit (js/parseInt (first %)) 1))
+            "Bit 1 set - This cartridge contains battery-backed PRG RAM ($6000-7FFF) or other persistent memory. ")
+          (when (= 1 (nth-bit (js/parseInt (first %)) 2))
+            "Bit 2 set - This game contains a 512-byte trainer at $7000-$71FF (stored before PRG data). ")
+          (when (= 1 (nth-bit (js/parseInt (first %)) 3))
+            "Bit 3 set - Ignore mirroring control or above mirroring bit; instead provide four-screen VRAM. ")
+          "The lower mapper nybble is: " (apply str (map (fn [bit] (nth-bit (js/parseInt (first %)) bit))
+                                                         [7 6 5 4])))]
+   [[0x07 0x08] 
+    #(str "Hex to binary: " (format-bin (js/parseInt (first %))) " "
+          (when (= 1 (nth-bit (js/parseInt (first %)) 0))
+            "Bit 0 set - VS Unisystem. ")
+          (when (= 1 (nth-bit (js/parseInt (first %)) 1))
+            "Bit 1 set - PlayChoice-10 (8KB of Hint Screen data stored after CHR data) ")
+          (when (and (= 1 (nth-bit (js/parseInt (first %)) 2)) (= 1 (nth-bit (js/parseInt (first %)) 3)))
+            "Bits 2 and 3 set - flags 8-15 are in NES 2.0 format. ")
+          "The upper mapper nybble is: " (apply str (map (fn [bit] (nth-bit (js/parseInt (first %)) bit))
+                                                         [7 6 5 4])))]
    [[0x08 0x09] first]
    [[0x09 0x0a] first]
    [[0x0a 0x0b] first]
    [[0x0b 0x0f] #(str "Ripped by (or zeros): " (apply str %))]])
+
+(comment
+  
+  (first '("13"))
+  
+  (js/parseInt (first '("13")))
+  
+  (nth-bit 13 7)
+  
+  (nth-bit (js/parseInt (first '("13"))) 4)
+  
+  ((fn [bit] (nth-bit (js/parseInt (first '("13"))) bit)) 6)
+  
+  (apply str (map (fn [bit] (nth-bit (js/parseInt (first '("01"))) bit))
+                  [7 6 5 4]))
+  
+  
+  )
+
 
 (defn rom-bank [file n]
   (let [offsets (take 2 (drop n (iterate #(+ 8192 %) 0)))]
