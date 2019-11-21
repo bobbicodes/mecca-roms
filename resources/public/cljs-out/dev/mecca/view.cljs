@@ -30,14 +30,14 @@
    [:table.tg
     [:tbody
      [:tr [:th.tg-0pky "Offsets"] [:th.tg-0lax "Hex"] [:th.tg-0lax "NESplanation"]]
-     (doall (for [[[from to] string value] offsets]
+     (doall (for [[[from to] notes] offsets]
               ^{:key from}
               [:tr
                [:td.tg-hmp3 (str "$" (.toString from 16) " - $" (.toString to 16))]
                [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
-               [:td.tg-hmp3 (str string (->>
-                                         (hex-bytes file from to)
-                                         value))]]))]]])
+               [:td.tg-hmp3 (str (->>
+                                  (hex-bytes file from to)
+                                  notes))]]))]]])
 
 (defn number-input [label value on-change]
   [:label label

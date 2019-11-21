@@ -1,6 +1,7 @@
 (ns ^:figwheel-hooks mecca.roms
   (:require
-   [goog.crypt :as crypt]))
+   [goog.crypt :as crypt]
+   [re-frame.core :refer [subscribe]]))
 
 (defn hex-bytes
   ([file n] (hex-bytes file n (inc n)))
@@ -8,6 +9,24 @@
    (map #(apply str %)
         (partition 2 (take (- (* 2 to) (* 2 from))
                            (drop (* 2 from) file))))))
+
+(defn format-hex [s]
+  (let [length (count s)]
+    (str "$"
+         (apply str (repeat (- 4 length) "0"))
+         s)))
+
+(defn format-bin [n]
+  (let [length (count (.toString n 2))]
+    (str "%"
+         (apply str (repeat (- 8 length) "0"))
+         (.toString n 2))))
+
+(comment
+  
+  (format-bin 03)
+  
+  )
 
 (defn word [file offset]
   (str "0x" (first (hex-bytes file (inc offset)))
@@ -30,19 +49,31 @@
   [file]
   (str (* 16 (hex-bytes file 0x04)) "KB"))
 
-(def nes-offsets     ;    each vector contains
-  [[[0x00 0x03]      ; <- the vector of offsets, followed by
-    "Hex to ASCII: " ; <- the NESplanation string, followed by 
-    hex->ascii]      ; <- a function that will compute the result
-                     ;    to display given the sequence of bytes.
-   [[0x04 0x05] "PRG ROM size: " #(str (* 16 (js/parseInt (str "0x" (first %)))) " KB")]
-   [[0x05 0x06] "CHR ROM size: " #(str (* 8 (js/parseInt (str "0x" (first %)))) " KB")]
-   [[0x06 0x07] "Flags 6 - Mapper, mirroring, battery, trainer: " first]
-   [[0x07 0x08] "Flags 7 - Mapper, VS/Playchoice, NES 2.0: " first]
-   [[0x08 0x09] "Flags 8 - PRG-RAM size (rarely used extension): " first]
-   [[0x09 0x0a] "Flags 9 - TV system (rarely used extension): " first]
-   [[0x0a 0x0b] "Flags 10 - TV system, PRG-RAM presence (unofficial, rarely used extension): " first]
-   [[0x0b 0x0f] "Unused padding (should be filled with zero, but some rippers put their name across bytes 7-15): " #(apply str %)]])
+(def nes-offsets ; each function will output a string when given the bytes at offsets
+  [[[0x00 0x03] #(str "Hex to ASCII: " "\"" (hex->ascii %) "\"")]
+   [[0x04 0x05] #(str "PRG ROM size: " 
+                      (* 16 (js/parseInt (str "0x" (first %)))) 
+                      " KB (" (js/parseInt (str "0x" (first %))) " 16K blocks)")]
+   [[0x05 0x06] #(str "CHR ROM size: " 
+                      (* 8 (js/parseInt (str "0x" (first %)))) 
+                      " KB (" (js/parseInt (str "0x" (first %))) 
+                      " 8K block" (when-not (= 1 (js/parseInt (str "0x" (first %)))) "s") ")")]
+   [[0x06 0x07] #(cond
+                   (= (last (format-bin (js/parseInt (first %)))) "1")
+                   "This game uses vertical mirroring (horizontal arrangement)"
+                   :else
+                   (first %))]
+   [[0x07 0x08] first]
+   [[0x08 0x09] first]
+   [[0x09 0x0a] first]
+   [[0x0a 0x0b] first]
+   [[0x0b 0x0f] #(str "Ripped by (or zeros): " (apply str %))]])
+
+(comment
+  
+ (last (format-bin (js/parseInt (first (hex-bytes @(subscribe [:file-upload]) 6)))))
+ (.toString 10 2)
+  )
 
 (defn rom-bank [file n]
   (let [offsets (take 2 (drop n (iterate #(+ 8192 %) 0)))]
