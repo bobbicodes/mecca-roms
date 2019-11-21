@@ -4,7 +4,10 @@
         reagent {:mvn/version "0.8.1"}
         re-frame {:mvn/version "0.10.8"}
         com.bhauman/rebel-readline {:mvn/version "0.1.4"}
-        com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
+        com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
+        io.djy/chronoid {:mvn/version "0.2.0"}
+        io.djy/mantra {:mvn/version "0.6.1"}}
+ 
  :aliases {:fig {:main-opts ["-m" "figwheel.main"]}
            :rebel {:main-opts ["-m" "rebel-readline.main"]}}
  :paths ["src" "resources" "target" "test"]}

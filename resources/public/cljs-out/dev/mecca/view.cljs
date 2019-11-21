@@ -8,6 +8,22 @@
    [mecca.examples.mario :refer [mario-hex]]
    [mecca.examples.smw :refer [smw-hex]]))
 
+(defn svg-paths
+  ([paths]
+   (svg-paths nil paths 0 0 1))
+  ([attrs paths]
+   (svg-paths attrs paths 0 0 1))
+  ([paths x y]
+   (svg-paths nil paths x y 1))
+  ([paths x y scale]
+   (svg-paths nil paths x y scale))
+  ([attrs paths x y scale]
+   (into [:g (merge attrs
+                    {:transform (str "scale(" scale ") translate(" x "," y ")")})]
+         (for [[color path] paths]
+           [:path {:stroke color
+                   :d      path}]))))
+
 (defn header-table [file offsets]
   [:div
    [:h3 "Header:"]
@@ -21,7 +37,11 @@
                [:td.tg-hmp3 (apply str (interpose " " (hex-bytes file from to)))]
                [:td.tg-hmp3 (str string (->>
                                          (hex-bytes file from to)
-                                         value)) ]]))]]])
+                                         value))]]))]]])
+
+(def arrow-l
+  [["#000000" "M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"]
+   ["#f8f800" "M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"]])
 
 (defn number-input [label value on-change]
   [:label label
@@ -38,15 +58,44 @@
    {:on-click onclick}
    label])
 
+(defn format-hex [s]
+  (let [length (count s)]
+    (str "$"
+         (apply str (repeat (- 4 length) "0"))
+         s)))
+
+(defn bank-selector []
+   (let [bank (subscribe [:bank])]
+    (fn []
+  [:span
+   [:svg {:width     30
+          :view-box  "0 -0.5 10 11"
+          :transform "translate(0,10)"
+          :cursor    "pointer"
+          :on-click  #(dispatch [:dec-bank])}
+    [:path {:stroke "#000000"
+            :d      "M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"}]
+    [:path {:stroke "#f8f800"
+            :d      "M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"}]]
+   (str (apply str (interpose " - " (map #(-> % (.toString 16) format-hex) (take 2 (drop (js/parseInt @bank) (iterate #(+ 8192 %) 0)))))))
+   [:svg {:width     30
+          :view-box  "0 -0.5 10 11"
+          :transform "translate (0,5),rotate (180)"
+          :cursor    "pointer"
+          :on-click  #(dispatch [:inc-bank])}
+    [:path {:stroke "#000000"
+            :d      "M4 0h1M3 1h2M2 2h1M4 2h3M1 3h1M0 4h1M1 5h1M2 6h1M4 6h3M3 7h2M4 8h1"}]
+    [:path {:stroke "#f8f800"
+            :d      "M3 2h1M2 3h5M1 4h6M2 5h5M3 6h1"}]]])))
+
 (defn rom-data []
   (let [bank (subscribe [:bank])]
     (fn [file]
       [:div
-       [:h2 "ROM data:"]
-       [number-input "Select 8K bank: " @bank #(dispatch [:select-bank (-> % .-target .-value)])]
-       [:p (str "$" (apply str (interpose " - $" (map #(.toString % 16) (take 2 (drop (js/parseInt @bank) (iterate #(+ 8192 %) 0)))))))]
+       [:h4 "Select 8KB bank:"]
+       [bank-selector]
        [:div
-        [:textarea 
+        [:textarea
          {:rows      30
           :cols      80
           :value     (apply str (interpose " " (roms/rom-bank file (js/parseInt @bank))))
@@ -88,7 +137,9 @@
                  :fill         (if (= choice @selected) "lightpink" "lightgray")
                  :on-mouse-over #(reset! selected choice)
                  :on-mouse-out #(reset! selected nil)
-                 :on-click #(dispatch [:select-item choice])
+                 :on-click (case choice 
+                             0 #(dispatch [:create-oscillator])
+                             #(dispatch [:select-item choice]))
                  :visibility   (if @menu? "visible" "hidden")}]
                [:text {:x           18
                        :y           (+ 48 (* choice 18))
@@ -96,7 +147,9 @@
                        :font-size   14
                        :pointer-events "none"
                        :visibility  (if @menu? "visible" "hidden")}
-                (str "Choice " (inc choice))]])))))
+                (str (case choice
+                       0 "Boot APU"
+                       (str "Choice " (inc choice))))]])))))
 
 (defn burger-menu []
   (let [hover? (r/atom false)

@@ -9,14 +9,14 @@ goog.require('re_frame.loggers');
  *   will not be present in the new structure.
  *   The key thing is that 'm' remains identical? to istelf if the path was never present
  */
-re_frame.utils.dissoc_in = (function re_frame$utils$dissoc_in(m,p__11558){
-var vec__11559 = p__11558;
-var seq__11560 = cljs.core.seq(vec__11559);
-var first__11561 = cljs.core.first(seq__11560);
-var seq__11560__$1 = cljs.core.next(seq__11560);
-var k = first__11561;
-var ks = seq__11560__$1;
-var keys = vec__11559;
+re_frame.utils.dissoc_in = (function re_frame$utils$dissoc_in(m,p__12171){
+var vec__12172 = p__12171;
+var seq__12173 = cljs.core.seq(vec__12172);
+var first__12174 = cljs.core.first(seq__12173);
+var seq__12173__$1 = cljs.core.next(seq__12173);
+var k = first__12174;
+var ks = seq__12173__$1;
+var keys = vec__12172;
 if(ks){
 var temp__5455__auto__ = cljs.core.get.cljs$core$IFn$_invoke$arity$2(m,k);
 if(cljs.core.truth_(temp__5455__auto__)){

@@ -1,5 +1,6 @@
 (ns ^:figwheel-hooks mecca.subs
-  (:require [re-frame.core :as rf :refer [reg-sub]]))
+  (:require [re-frame.core :as rf :refer [reg-sub]]
+            [mantra.core :as m]))
 
 (reg-sub
  :file-upload
@@ -20,3 +21,13 @@
  :selected-item
  (fn [db _]
    (:selected-item db)))
+
+(reg-sub
+ :oscillator
+ (fn [db _]
+   (:oscillator db)))
+
+(reg-sub
+ :tempo
+ (fn [db _]
+   (:tempo db)))

@@ -1,0 +1,20 @@
+// Compiled by ClojureScript 1.10.339 {:static-fns true, :optimize-constants true}
+goog.provide('mantra.core');
+goog.require('cljs.core');
+goog.require('cljs.core.constants');
+goog.require('mantra.osc');
+goog.require('mantra.time');
+goog.require('mantra.note');
+mantra.core.osc = mantra.osc.osc;
+mantra.core.start_osc = mantra.osc.start_osc;
+mantra.core.stop_osc = mantra.osc.stop_osc;
+mantra.core.stop_all_oscs = mantra.osc.stop_all_oscs;
+mantra.core.get_tempo = mantra.time.get_tempo;
+mantra.core.set_tempo = mantra.time.set_tempo;
+mantra.core.update_tempo = mantra.time.update_tempo;
+mantra.core.play_note = mantra.note.play_note;
+mantra.core.play_notes = mantra.note.play_notes;
+mantra.core.play_chord = mantra.note.play_chord;
+mantra.core.also_play_note = mantra.note.also_play_note;
+mantra.core.also_play_notes = mantra.note.also_play_notes;
+mantra.core.also_play_chord = mantra.note.also_play_chord;
