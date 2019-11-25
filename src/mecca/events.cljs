@@ -9,6 +9,7 @@
    {:burger-menu? false
     :selected-item nil
     :file-upload nil
+    :loading? false
     :bank 0
     :oscillator nil
     :note nil}))
@@ -22,6 +23,13 @@
  :inc-bank
  (fn [db [_ _]]
    (update db :bank inc)))
+
+(reg-event-db
+ :set-loading
+ (fn [db [_ _]]
+   (assoc db
+          :loading? true
+          :file-upload nil)))
 
 (reg-event-db
  :dec-bank
@@ -73,7 +81,8 @@
 (reg-event-db
  :file-upload
  (fn [db [_ file]]
-      (assoc db :file-upload file)))
+      (assoc db
+             :file-upload file)))
 
 (reg-event-db
  :create-oscillator

@@ -8,6 +8,11 @@
    (:file-upload db)))
 
 (reg-sub
+ :loading?
+ (fn [db _]
+   (:loading? db)))
+
+(reg-sub
  :bank
  (fn [db _]
    (:bank db)))

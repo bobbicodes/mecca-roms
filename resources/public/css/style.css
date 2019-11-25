@@ -108,3 +108,18 @@ span {
 button {
   margin: 12px;
 }
+
+.fade {
+  animation: fade 1s 0s ease infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+

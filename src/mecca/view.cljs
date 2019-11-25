@@ -98,7 +98,7 @@
        [:div
         [:textarea
          {:rows      30
-          :cols      80
+          :cols      48
           :value     (apply str (interpose " " (roms/rom-bank file (js/parseInt @bank))))
           :read-only true}]]])))
 
@@ -108,16 +108,21 @@
      {:type      "file"
       :on-change 
       (fn [e]
+        (dispatch [:set-loading])
         (let [dom    (o/get e "target")
               file   (o/getValueByKeys dom #js ["files" 0])
               reader (js/FileReader.)]
           (.readAsArrayBuffer reader file)
           (set! (.-onload reader)
-                #(dispatch [:file-upload
-                            (-> % .-target .-result
+            (fn [e]
+              (dispatch [:file-upload
+                              (-> e .-target .-result
                                 (js/Uint8Array.)
                                 crypt/byteArrayToHex
-                                .toUpperCase)]))))}]])
+                                .toUpperCase)])))))}]
+    (when (and (= 0 (count @(subscribe [:file-upload])))
+               @(subscribe [:loading?]))
+      [:p.fade "Loading..."])])
 
 (defn menu-items []
   (let [selected (r/atom nil)
