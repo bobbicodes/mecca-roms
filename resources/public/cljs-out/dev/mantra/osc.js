@@ -34,14 +34,14 @@ goog.require('chronoid.core');
  */
 mantra.osc.osc = (function mantra$osc$osc(var_args){
 var args__4534__auto__ = [];
-var len__4531__auto___10019 = arguments.length;
-var i__4532__auto___10020 = (0);
+var len__4531__auto___10010 = arguments.length;
+var i__4532__auto___10011 = (0);
 while(true){
-if((i__4532__auto___10020 < len__4531__auto___10019)){
-args__4534__auto__.push((arguments[i__4532__auto___10020]));
+if((i__4532__auto___10011 < len__4531__auto___10010)){
+args__4534__auto__.push((arguments[i__4532__auto___10011]));
 
-var G__10021 = (i__4532__auto___10020 + (1));
-i__4532__auto___10020 = G__10021;
+var G__10012 = (i__4532__auto___10011 + (1));
+i__4532__auto___10011 = G__10012;
 continue;
 } else {
 }
@@ -52,13 +52,13 @@ var argseq__4535__auto__ = ((((0) < args__4534__auto__.length))?(new cljs.core.I
 return mantra.osc.osc.cljs$core$IFn$_invoke$arity$variadic(argseq__4535__auto__);
 });
 
-mantra.osc.osc.cljs$core$IFn$_invoke$arity$variadic = (function (p__10016){
-var map__10017 = p__10016;
-var map__10017__$1 = ((((!((map__10017 == null)))?(((((map__10017.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10017.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10017):map__10017);
-var osc_map = map__10017__$1;
-var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10017__$1,cljs.core.cst$kw$type);
-var context = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10017__$1,cljs.core.cst$kw$context);
-var clock = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10017__$1,cljs.core.cst$kw$clock);
+mantra.osc.osc.cljs$core$IFn$_invoke$arity$variadic = (function (p__10007){
+var map__10008 = p__10007;
+var map__10008__$1 = ((((!((map__10008 == null)))?(((((map__10008.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10008.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10008):map__10008);
+var osc_map = map__10008__$1;
+var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10008__$1,cljs.core.cst$kw$type);
+var context = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10008__$1,cljs.core.cst$kw$context);
+var clock = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10008__$1,cljs.core.cst$kw$clock);
 var type__$1 = cljs.core.name((function (){var or__3949__auto__ = type;
 if(cljs.core.truth_(or__3949__auto__)){
 return or__3949__auto__;
@@ -99,9 +99,9 @@ return mantra.time.create_clock(context__$1);
 mantra.osc.osc.cljs$lang$maxFixedArity = (0);
 
 /** @this {Function} */
-mantra.osc.osc.cljs$lang$applyTo = (function (seq10015){
+mantra.osc.osc.cljs$lang$applyTo = (function (seq10006){
 var self__4519__auto__ = this;
-return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq10015));
+return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq10006));
 });
 
 /**
@@ -111,14 +111,14 @@ return self__4519__auto__.cljs$core$IFn$_invoke$arity$variadic(cljs.core.seq(seq
  * Returns a map including the oscillator and gain nodes and the ID of the
  * oscillator model used as a blueprint.
  */
-mantra.osc.osc_STAR_ = (function mantra$osc$osc_STAR_(p__10022){
-var map__10023 = p__10022;
-var map__10023__$1 = ((((!((map__10023 == null)))?(((((map__10023.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10023.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10023):map__10023);
-var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10023__$1,cljs.core.cst$kw$id);
-var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10023__$1,cljs.core.cst$kw$type);
-var freq = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10023__$1,cljs.core.cst$kw$freq);
-var context = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10023__$1,cljs.core.cst$kw$context);
-var clock = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10023__$1,cljs.core.cst$kw$clock);
+mantra.osc.osc_STAR_ = (function mantra$osc$osc_STAR_(p__10013){
+var map__10014 = p__10013;
+var map__10014__$1 = ((((!((map__10014 == null)))?(((((map__10014.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10014.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10014):map__10014);
+var id = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10014__$1,cljs.core.cst$kw$id);
+var type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10014__$1,cljs.core.cst$kw$type);
+var freq = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10014__$1,cljs.core.cst$kw$freq);
+var context = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10014__$1,cljs.core.cst$kw$context);
+var clock = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10014__$1,cljs.core.cst$kw$clock);
 var osc = context.createOscillator();
 var gain = context.createGain();
 osc.type = (function (){var or__3949__auto__ = type;
@@ -173,11 +173,11 @@ return mantra.osc.gain_ramp(gain_node,0.001);
 /**
  * Start an oscillator and add it to *oscillators*.
  */
-mantra.osc.start_osc = (function mantra$osc$start_osc(p__10025){
-var map__10026 = p__10025;
-var map__10026__$1 = ((((!((map__10026 == null)))?(((((map__10026.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10026.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10026):map__10026);
-var osc_impl = map__10026__$1;
-var osc_node = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10026__$1,cljs.core.cst$kw$osc_DASH_node);
+mantra.osc.start_osc = (function mantra$osc$start_osc(p__10016){
+var map__10017 = p__10016;
+var map__10017__$1 = ((((!((map__10017 == null)))?(((((map__10017.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10017.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10017):map__10017);
+var osc_impl = map__10017__$1;
+var osc_node = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10017__$1,cljs.core.cst$kw$osc_DASH_node);
 osc_node.start((0));
 
 return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$3(mantra.osc._STAR_oscillators_STAR_,cljs.core.conj,osc_impl);
@@ -189,71 +189,71 @@ return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$3(mantra.osc._STAR_oscil
  */
 mantra.osc.stop_osc = (function mantra$osc$stop_osc(osc){
 if(cljs.core.contains_QMARK_(osc,cljs.core.cst$kw$model_DASH_id)){
-var map__10029 = osc;
-var map__10029__$1 = ((((!((map__10029 == null)))?(((((map__10029.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10029.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10029):map__10029);
-var osc_node = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10029__$1,cljs.core.cst$kw$osc_DASH_node);
-var gain_node = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10029__$1,cljs.core.cst$kw$gain_DASH_node);
-var clock = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10029__$1,cljs.core.cst$kw$clock);
+var map__10020 = osc;
+var map__10020__$1 = ((((!((map__10020 == null)))?(((((map__10020.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__10020.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__10020):map__10020);
+var osc_node = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10020__$1,cljs.core.cst$kw$osc_DASH_node);
+var gain_node = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10020__$1,cljs.core.cst$kw$gain_DASH_node);
+var clock = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__10020__$1,cljs.core.cst$kw$clock);
 mantra.osc.silence_ramp(gain_node);
 
-return chronoid.core.set_timeout_BANG_(clock,((function (map__10029,map__10029__$1,osc_node,gain_node,clock){
+return chronoid.core.set_timeout_BANG_(clock,((function (map__10020,map__10020__$1,osc_node,gain_node,clock){
 return (function (){
 cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$3(mantra.osc._STAR_oscillators_STAR_,cljs.core.disj,osc);
 
 return osc_node.stop();
-});})(map__10029,map__10029__$1,osc_node,gain_node,clock))
+});})(map__10020,map__10020__$1,osc_node,gain_node,clock))
 ,(1000));
 } else {
 if(cljs.core.contains_QMARK_(osc,cljs.core.cst$kw$id)){
-var seq__10031 = cljs.core.seq(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__10028_SHARP_){
-return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$id.cljs$core$IFn$_invoke$arity$1(osc),cljs.core.cst$kw$model_DASH_id.cljs$core$IFn$_invoke$arity$1(p1__10028_SHARP_));
+var seq__10022 = cljs.core.seq(cljs.core.filter.cljs$core$IFn$_invoke$arity$2((function (p1__10019_SHARP_){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.cst$kw$id.cljs$core$IFn$_invoke$arity$1(osc),cljs.core.cst$kw$model_DASH_id.cljs$core$IFn$_invoke$arity$1(p1__10019_SHARP_));
 }),cljs.core.deref(mantra.osc._STAR_oscillators_STAR_)));
-var chunk__10032 = null;
-var count__10033 = (0);
-var i__10034 = (0);
+var chunk__10023 = null;
+var count__10024 = (0);
+var i__10025 = (0);
 while(true){
-if((i__10034 < count__10033)){
-var osc_impl = chunk__10032.cljs$core$IIndexed$_nth$arity$2(null,i__10034);
+if((i__10025 < count__10024)){
+var osc_impl = chunk__10023.cljs$core$IIndexed$_nth$arity$2(null,i__10025);
 (mantra.osc.stop_osc.cljs$core$IFn$_invoke$arity$1 ? mantra.osc.stop_osc.cljs$core$IFn$_invoke$arity$1(osc_impl) : mantra.osc.stop_osc.call(null,osc_impl));
 
 
-var G__10035 = seq__10031;
-var G__10036 = chunk__10032;
-var G__10037 = count__10033;
-var G__10038 = (i__10034 + (1));
-seq__10031 = G__10035;
-chunk__10032 = G__10036;
-count__10033 = G__10037;
-i__10034 = G__10038;
+var G__10026 = seq__10022;
+var G__10027 = chunk__10023;
+var G__10028 = count__10024;
+var G__10029 = (i__10025 + (1));
+seq__10022 = G__10026;
+chunk__10023 = G__10027;
+count__10024 = G__10028;
+i__10025 = G__10029;
 continue;
 } else {
-var temp__5457__auto__ = cljs.core.seq(seq__10031);
-if(temp__5457__auto__){
-var seq__10031__$1 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_(seq__10031__$1)){
-var c__4351__auto__ = cljs.core.chunk_first(seq__10031__$1);
-var G__10039 = cljs.core.chunk_rest(seq__10031__$1);
-var G__10040 = c__4351__auto__;
-var G__10041 = cljs.core.count(c__4351__auto__);
-var G__10042 = (0);
-seq__10031 = G__10039;
-chunk__10032 = G__10040;
-count__10033 = G__10041;
-i__10034 = G__10042;
+var temp__5720__auto__ = cljs.core.seq(seq__10022);
+if(temp__5720__auto__){
+var seq__10022__$1 = temp__5720__auto__;
+if(cljs.core.chunked_seq_QMARK_(seq__10022__$1)){
+var c__4351__auto__ = cljs.core.chunk_first(seq__10022__$1);
+var G__10030 = cljs.core.chunk_rest(seq__10022__$1);
+var G__10031 = c__4351__auto__;
+var G__10032 = cljs.core.count(c__4351__auto__);
+var G__10033 = (0);
+seq__10022 = G__10030;
+chunk__10023 = G__10031;
+count__10024 = G__10032;
+i__10025 = G__10033;
 continue;
 } else {
-var osc_impl = cljs.core.first(seq__10031__$1);
+var osc_impl = cljs.core.first(seq__10022__$1);
 (mantra.osc.stop_osc.cljs$core$IFn$_invoke$arity$1 ? mantra.osc.stop_osc.cljs$core$IFn$_invoke$arity$1(osc_impl) : mantra.osc.stop_osc.call(null,osc_impl));
 
 
-var G__10043 = cljs.core.next(seq__10031__$1);
-var G__10044 = null;
-var G__10045 = (0);
-var G__10046 = (0);
-seq__10031 = G__10043;
-chunk__10032 = G__10044;
-count__10033 = G__10045;
-i__10034 = G__10046;
+var G__10034 = cljs.core.next(seq__10022__$1);
+var G__10035 = null;
+var G__10036 = (0);
+var G__10037 = (0);
+seq__10022 = G__10034;
+chunk__10023 = G__10035;
+count__10024 = G__10036;
+i__10025 = G__10037;
 continue;
 }
 } else {
@@ -271,53 +271,53 @@ return null;
  * Silences and stops all currently playing oscillators.
  */
 mantra.osc.stop_all_oscs = (function mantra$osc$stop_all_oscs(){
-var seq__10047 = cljs.core.seq(cljs.core.deref(mantra.osc._STAR_oscillators_STAR_));
-var chunk__10048 = null;
-var count__10049 = (0);
-var i__10050 = (0);
+var seq__10038 = cljs.core.seq(cljs.core.deref(mantra.osc._STAR_oscillators_STAR_));
+var chunk__10039 = null;
+var count__10040 = (0);
+var i__10041 = (0);
 while(true){
-if((i__10050 < count__10049)){
-var osc = chunk__10048.cljs$core$IIndexed$_nth$arity$2(null,i__10050);
+if((i__10041 < count__10040)){
+var osc = chunk__10039.cljs$core$IIndexed$_nth$arity$2(null,i__10041);
 mantra.osc.stop_osc(osc);
 
 
-var G__10051 = seq__10047;
-var G__10052 = chunk__10048;
-var G__10053 = count__10049;
-var G__10054 = (i__10050 + (1));
-seq__10047 = G__10051;
-chunk__10048 = G__10052;
-count__10049 = G__10053;
-i__10050 = G__10054;
+var G__10042 = seq__10038;
+var G__10043 = chunk__10039;
+var G__10044 = count__10040;
+var G__10045 = (i__10041 + (1));
+seq__10038 = G__10042;
+chunk__10039 = G__10043;
+count__10040 = G__10044;
+i__10041 = G__10045;
 continue;
 } else {
-var temp__5457__auto__ = cljs.core.seq(seq__10047);
-if(temp__5457__auto__){
-var seq__10047__$1 = temp__5457__auto__;
-if(cljs.core.chunked_seq_QMARK_(seq__10047__$1)){
-var c__4351__auto__ = cljs.core.chunk_first(seq__10047__$1);
-var G__10055 = cljs.core.chunk_rest(seq__10047__$1);
-var G__10056 = c__4351__auto__;
-var G__10057 = cljs.core.count(c__4351__auto__);
-var G__10058 = (0);
-seq__10047 = G__10055;
-chunk__10048 = G__10056;
-count__10049 = G__10057;
-i__10050 = G__10058;
+var temp__5720__auto__ = cljs.core.seq(seq__10038);
+if(temp__5720__auto__){
+var seq__10038__$1 = temp__5720__auto__;
+if(cljs.core.chunked_seq_QMARK_(seq__10038__$1)){
+var c__4351__auto__ = cljs.core.chunk_first(seq__10038__$1);
+var G__10046 = cljs.core.chunk_rest(seq__10038__$1);
+var G__10047 = c__4351__auto__;
+var G__10048 = cljs.core.count(c__4351__auto__);
+var G__10049 = (0);
+seq__10038 = G__10046;
+chunk__10039 = G__10047;
+count__10040 = G__10048;
+i__10041 = G__10049;
 continue;
 } else {
-var osc = cljs.core.first(seq__10047__$1);
+var osc = cljs.core.first(seq__10038__$1);
 mantra.osc.stop_osc(osc);
 
 
-var G__10059 = cljs.core.next(seq__10047__$1);
-var G__10060 = null;
-var G__10061 = (0);
-var G__10062 = (0);
-seq__10047 = G__10059;
-chunk__10048 = G__10060;
-count__10049 = G__10061;
-i__10050 = G__10062;
+var G__10050 = cljs.core.next(seq__10038__$1);
+var G__10051 = null;
+var G__10052 = (0);
+var G__10053 = (0);
+seq__10038 = G__10050;
+chunk__10039 = G__10051;
+count__10040 = G__10052;
+i__10041 = G__10053;
 continue;
 }
 } else {

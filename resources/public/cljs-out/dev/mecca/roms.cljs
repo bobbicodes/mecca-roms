@@ -1,6 +1,7 @@
 (ns ^:figwheel-hooks mecca.roms
   (:require
-   [goog.crypt :as crypt]))
+   [goog.crypt :as crypt]
+   [re-frame.core :refer [subscribe]]))
 
 (defn hex-bytes
   ([file n] (hex-bytes file n (inc n)))
@@ -92,6 +93,8 @@
    [[0x0b 0x0f] #(str "Ripped by (or zeros): " (apply str %))]])
 
 (comment
+  
+  @(subscribe [:file-upload])
   
   (first '("13"))
   

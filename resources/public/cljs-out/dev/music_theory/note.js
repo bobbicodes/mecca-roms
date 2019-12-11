@@ -34,18 +34,18 @@ var this__4203__auto____$1 = this;
 return this__4203__auto____$1.cljs$core$ILookup$_lookup$arity$3(null,k__4204__auto__,null);
 });
 
-music_theory.note.Note.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4205__auto__,k10210,else__4206__auto__){
+music_theory.note.Note.prototype.cljs$core$ILookup$_lookup$arity$3 = (function (this__4205__auto__,k10201,else__4206__auto__){
 var self__ = this;
 var this__4205__auto____$1 = this;
-var G__10214 = k10210;
-var G__10214__$1 = (((G__10214 instanceof cljs.core.Keyword))?G__10214.fqn:null);
-switch (G__10214__$1) {
+var G__10205 = k10201;
+var G__10205__$1 = (((G__10205 instanceof cljs.core.Keyword))?G__10205.fqn:null);
+switch (G__10205__$1) {
 case "number":
 return self__.number;
 
 break;
 default:
-return cljs.core.get.cljs$core$IFn$_invoke$arity$3(self__.__extmap,k10210,else__4206__auto__);
+return cljs.core.get.cljs$core$IFn$_invoke$arity$3(self__.__extmap,k10201,else__4206__auto__);
 
 }
 });
@@ -61,10 +61,10 @@ return cljs.core.pr_sequential_writer(writer__4218__auto__,cljs.core.pr_writer,"
 return cljs.core.pr_sequential_writer(writer__4218__auto__,pr_pair__4220__auto__,"#music-theory.note.Note{",", ","}",opts__4219__auto__,cljs.core.concat.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[cljs.core.cst$kw$number,self__.number],null))], null),self__.__extmap));
 });
 
-music_theory.note.Note.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__10209){
+music_theory.note.Note.prototype.cljs$core$IIterable$_iterator$arity$1 = (function (G__10200){
 var self__ = this;
-var G__10209__$1 = this;
-return (new cljs.core.RecordIter((0),G__10209__$1,1,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$number], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator(self__.__extmap):cljs.core.nil_iter())));
+var G__10200__$1 = this;
+return (new cljs.core.RecordIter((0),G__10200__$1,1,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$number], null),(cljs.core.truth_(self__.__extmap)?cljs.core._iterator(self__.__extmap):cljs.core.nil_iter())));
 });
 
 music_theory.note.Note.prototype.cljs$core$IMeta$_meta$arity$1 = (function (this__4201__auto__){
@@ -92,12 +92,12 @@ var h__4061__auto__ = self__.__hash;
 if(!((h__4061__auto__ == null))){
 return h__4061__auto__;
 } else {
-var h__4061__auto____$1 = (function (){var fexpr__10215 = ((function (h__4061__auto__,this__4199__auto____$1){
+var h__4061__auto____$1 = (function (){var fexpr__10206 = ((function (h__4061__auto__,this__4199__auto____$1){
 return (function (coll__4200__auto__){
 return (-2092078955 ^ cljs.core.hash_unordered_coll(coll__4200__auto__));
 });})(h__4061__auto__,this__4199__auto____$1))
 ;
-return fexpr__10215(this__4199__auto____$1);
+return fexpr__10206(this__4199__auto____$1);
 })();
 self__.__hash = h__4061__auto____$1;
 
@@ -105,10 +105,10 @@ return h__4061__auto____$1;
 }
 });
 
-music_theory.note.Note.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this10211,other10212){
+music_theory.note.Note.prototype.cljs$core$IEquiv$_equiv$arity$2 = (function (this10202,other10203){
 var self__ = this;
-var this10211__$1 = this;
-return ((!((other10212 == null))) && ((this10211__$1.constructor === other10212.constructor)) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(this10211__$1.number,other10212.number)) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(this10211__$1.__extmap,other10212.__extmap)));
+var this10202__$1 = this;
+return ((!((other10203 == null))) && ((this10202__$1.constructor === other10203.constructor)) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(this10202__$1.number,other10203.number)) && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(this10202__$1.__extmap,other10203.__extmap)));
 });
 
 music_theory.note.Note.prototype.cljs$core$IMap$_dissoc$arity$2 = (function (this__4212__auto__,k__4213__auto__){
@@ -121,18 +121,18 @@ return (new music_theory.note.Note(self__.number,self__.__meta,cljs.core.not_emp
 }
 });
 
-music_theory.note.Note.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4210__auto__,k__4211__auto__,G__10209){
+music_theory.note.Note.prototype.cljs$core$IAssociative$_assoc$arity$3 = (function (this__4210__auto__,k__4211__auto__,G__10200){
 var self__ = this;
 var this__4210__auto____$1 = this;
-var pred__10216 = cljs.core.keyword_identical_QMARK_;
-var expr__10217 = k__4211__auto__;
-if(cljs.core.truth_((function (){var G__10219 = cljs.core.cst$kw$number;
-var G__10220 = expr__10217;
-return (pred__10216.cljs$core$IFn$_invoke$arity$2 ? pred__10216.cljs$core$IFn$_invoke$arity$2(G__10219,G__10220) : pred__10216.call(null,G__10219,G__10220));
+var pred__10207 = cljs.core.keyword_identical_QMARK_;
+var expr__10208 = k__4211__auto__;
+if(cljs.core.truth_((function (){var G__10210 = cljs.core.cst$kw$number;
+var G__10211 = expr__10208;
+return (pred__10207.cljs$core$IFn$_invoke$arity$2 ? pred__10207.cljs$core$IFn$_invoke$arity$2(G__10210,G__10211) : pred__10207.call(null,G__10210,G__10211));
 })())){
-return (new music_theory.note.Note(G__10209,self__.__meta,self__.__extmap,null));
+return (new music_theory.note.Note(G__10200,self__.__meta,self__.__extmap,null));
 } else {
-return (new music_theory.note.Note(self__.number,self__.__meta,cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(self__.__extmap,k__4211__auto__,G__10209),null));
+return (new music_theory.note.Note(self__.number,self__.__meta,cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(self__.__extmap,k__4211__auto__,G__10200),null));
 }
 });
 
@@ -142,10 +142,10 @@ var this__4215__auto____$1 = this;
 return cljs.core.seq(cljs.core.concat.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(new cljs.core.MapEntry(cljs.core.cst$kw$number,self__.number,null))], null),self__.__extmap));
 });
 
-music_theory.note.Note.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4202__auto__,G__10209){
+music_theory.note.Note.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (this__4202__auto__,G__10200){
 var self__ = this;
 var this__4202__auto____$1 = this;
-return (new music_theory.note.Note(self__.number,G__10209,self__.__extmap,self__.__hash));
+return (new music_theory.note.Note(self__.number,G__10200,self__.__extmap,self__.__hash));
 });
 
 music_theory.note.Note.prototype.cljs$core$ICollection$_conj$arity$2 = (function (this__4208__auto__,entry__4209__auto__){
@@ -182,15 +182,15 @@ return (new music_theory.note.Note(number,null,null,null));
 /**
  * Factory function for music-theory.note/Note, taking a map of keywords to field values.
  */
-music_theory.note.map__GT_Note = (function music_theory$note$map__GT_Note(G__10213){
-var extmap__4236__auto__ = (function (){var G__10221 = cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(G__10213,cljs.core.cst$kw$number);
-if(cljs.core.record_QMARK_(G__10213)){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentArrayMap.EMPTY,G__10221);
+music_theory.note.map__GT_Note = (function music_theory$note$map__GT_Note(G__10204){
+var extmap__4236__auto__ = (function (){var G__10212 = cljs.core.dissoc.cljs$core$IFn$_invoke$arity$2(G__10204,cljs.core.cst$kw$number);
+if(cljs.core.record_QMARK_(G__10204)){
+return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentArrayMap.EMPTY,G__10212);
 } else {
-return G__10221;
+return G__10212;
 }
 })();
-return (new music_theory.note.Note(cljs.core.cst$kw$number.cljs$core$IFn$_invoke$arity$1(G__10213),null,cljs.core.not_empty(extmap__4236__auto__),null));
+return (new music_theory.note.Note(cljs.core.cst$kw$number.cljs$core$IFn$_invoke$arity$1(G__10204),null,cljs.core.not_empty(extmap__4236__auto__),null));
 });
 
 music_theory.note.intervals = cljs.core.PersistentHashMap.fromArrays(["d","f","e","G","E","C","F","B","a","b","g","A","D","c"],[(2),(5),(4),(7),(4),(0),(5),(11),(9),(11),(7),(9),(2),(0)]);
@@ -203,10 +203,10 @@ music_theory.note.intervals = cljs.core.PersistentHashMap.fromArrays(["d","f","e
  */
 music_theory.note.__GT_note = (function music_theory$note$__GT_note(x){
 var s = cljs.core.name(x);
-var vec__10223 = cljs.core.rest(cljs.core.re_matches(/([A-Ga-g])([#b]*)(-?\d+)/,s));
-var letter = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10223,(0),null);
-var accs = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10223,(1),null);
-var octave = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10223,(2),null);
+var vec__10214 = cljs.core.rest(cljs.core.re_matches(/([A-Ga-g])([#b]*)(-?\d+)/,s));
+var letter = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10214,(0),null);
+var accs = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10214,(1),null);
+var octave = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__10214,(2),null);
 if(cljs.core.truth_((function (){var and__3938__auto__ = letter;
 if(cljs.core.truth_(and__3938__auto__)){
 var and__3938__auto____$1 = accs;
@@ -221,10 +221,10 @@ return and__3938__auto__;
 })())){
 var octave__$1 = Number(octave);
 var base_note = (((music_theory.note.intervals.cljs$core$IFn$_invoke$arity$1 ? music_theory.note.intervals.cljs$core$IFn$_invoke$arity$1(letter) : music_theory.note.intervals.call(null,letter)) + (octave__$1 * (12))) + (12));
-return music_theory.note.__GT_Note(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(((function (octave__$1,base_note,s,vec__10223,letter,accs,octave){
+return music_theory.note.__GT_Note(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(((function (octave__$1,base_note,s,vec__10214,letter,accs,octave){
 return (function (note_number,accidental){
-var G__10226 = accidental;
-switch (G__10226) {
+var G__10217 = accidental;
+switch (G__10217) {
 case "#":
 return (note_number + (1));
 
@@ -234,10 +234,10 @@ return (note_number - (1));
 
 break;
 default:
-throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10226)].join('')));
+throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10217)].join('')));
 
 }
-});})(octave__$1,base_note,s,vec__10223,letter,accs,octave))
+});})(octave__$1,base_note,s,vec__10214,letter,accs,octave))
 ,base_note,accs));
 } else {
 throw (new Error("Invalid note format."));

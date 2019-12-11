@@ -7,17 +7,17 @@ goog.require('music_theory.note');
  * Equal temperament: so convenient, yet so ugly.
  */
 music_theory.pitch.tunings.equal__GT_ = (function music_theory$pitch$tunings$equal__GT_(ref_pitch,midi_note){
-return (ref_pitch * (function (){var G__10235 = (2);
-var G__10236 = ((midi_note - (69)) / 12.0);
-return Math.pow(G__10235,G__10236);
+return (ref_pitch * (function (){var G__10226 = (2);
+var G__10227 = ((midi_note - (69)) / 12.0);
+return Math.pow(G__10226,G__10227);
 })());
 });
 music_theory.pitch.tunings._LT__equal = (function music_theory$pitch$tunings$_LT__equal(ref_pitch,freq){
 var log2 = (function music_theory$pitch$tunings$_LT__equal_$_log2(n){
 return (Math.log(n) / Math.log((2)));
 });
-var G__10237 = ((69) + ((12) * log2((freq / ref_pitch))));
-return Math.round(G__10237);
+var G__10228 = ((69) + ((12) * log2((freq / ref_pitch))));
+return Math.round(G__10228);
 });
 /**
  * A higher-order function that creates a tuning function for a well-tempered

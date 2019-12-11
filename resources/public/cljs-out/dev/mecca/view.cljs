@@ -106,7 +106,7 @@
    [:div
     [:input#input
      {:type      "file"
-      :on-change 
+      :on-change
       (fn [e]
         (dispatch [:set-loading])
         (let [dom    (o/get e "target")

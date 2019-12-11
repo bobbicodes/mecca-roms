@@ -65,7 +65,7 @@
  (dispatch [:set-tempo 150])
  @(subscribe [:tempo])
   
-  (dispatch [:play-note @(subscribe [:oscillator]) :C2 :half])
+  (dispatch [:play-note @(subscribe [:oscillator]) :C1 :eighth])
  )
 
 (reg-event-db

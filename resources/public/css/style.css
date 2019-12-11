@@ -65,40 +65,34 @@ body {
   color: rgb(29, 180, 29);
 }
 
-  h1 {
-    font-size: 2em;
-    color: purple;
-    line-height: 1;
-    padding: 8px;
-    margin: 2px;
+h1 {
+  font-size: 2em;
+  color: purple;
+  line-height: 1;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: purple;
+  line-height: 1;
+  padding : 4px;
+}
+
+ h4 {
+  font-size: 1em;
+  color: rgb(220, 20, 170);
+  margin : 8px;
   }
 
-  h2 {
-    font-size: 1.5em;
-    color: purple;
-    line-height: 1;
-    padding : 4px;
-  }
-
-  h4 {
-    font-size: 1em;
-    color: rgb(220, 20, 170);
-    margin : 12px;
-  }
-
-  p {
-    font-size : 16px;
-    padding: 12px;
-    margin : 0;
+p {
+  font-size : 16px;
+  padding: 8px;
+  margin : 0;
 }
 
 input {
-  padding: 4px;
-  margin: 8px;
-}
-
-textarea {
-  margin: 8px;
+  padding: 8px;
 }
 
 span {
@@ -106,7 +100,7 @@ span {
 }
 
 button {
-  margin: 12px;
+  margin: 8px;
 }
 
 .fade {

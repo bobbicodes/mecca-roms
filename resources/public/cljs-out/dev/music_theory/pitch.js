@@ -19,8 +19,8 @@ return music_theory.pitch._STAR_reference_pitch_STAR_ = freq;
  * the frequency of a note in Hz.
  */
 music_theory.pitch.set_key_BANG_ = (function music_theory$pitch$set_key_BANG_(var_args){
-var G__10361 = arguments.length;
-switch (G__10361) {
+var G__10352 = arguments.length;
+switch (G__10352) {
 case 1:
 return music_theory.pitch.set_key_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -70,9 +70,9 @@ if(cljs.core.integer_QMARK_(midi_note)){
 throw (new Error("Assert failed: (integer? midi-note)"));
 }
 
-var _PERCENT_ = (function (){var G__10365 = music_theory.pitch._STAR_tuning_system_STAR_;
-var G__10365__$1 = (((G__10365 instanceof cljs.core.Keyword))?G__10365.fqn:null);
-switch (G__10365__$1) {
+var _PERCENT_ = (function (){var G__10356 = music_theory.pitch._STAR_tuning_system_STAR_;
+var G__10356__$1 = (((G__10356 instanceof cljs.core.Keyword))?G__10356.fqn:null);
+switch (G__10356__$1) {
 case "equal":
 return music_theory.pitch.tunings.equal__GT_(music_theory.pitch._STAR_reference_pitch_STAR_,midi_note);
 
@@ -98,7 +98,7 @@ return music_theory.pitch.tunings.young__GT_(music_theory.pitch._STAR_reference_
 
 break;
 default:
-throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10365__$1)].join('')));
+throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10356__$1)].join('')));
 
 }
 })();
@@ -147,15 +147,15 @@ if((freq > (0))){
 throw (new Error("Assert failed: (pos? freq)"));
 }
 
-var _PERCENT_ = (function (){var G__10367 = music_theory.pitch._STAR_tuning_system_STAR_;
-var G__10367__$1 = (((G__10367 instanceof cljs.core.Keyword))?G__10367.fqn:null);
-switch (G__10367__$1) {
+var _PERCENT_ = (function (){var G__10358 = music_theory.pitch._STAR_tuning_system_STAR_;
+var G__10358__$1 = (((G__10358 instanceof cljs.core.Keyword))?G__10358.fqn:null);
+switch (G__10358__$1) {
 case "equal":
 return music_theory.pitch.tunings._LT__equal(music_theory.pitch._STAR_reference_pitch_STAR_,freq);
 
 break;
 default:
-throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10367__$1)].join('')));
+throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__10358__$1)].join('')));
 
 }
 })();
